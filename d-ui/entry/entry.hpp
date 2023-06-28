@@ -16,6 +16,7 @@ namespace entry {
 		void g_setup_rendering_state( std::function<void( )> g_function );
 		void g_warp_render_state( IDirect3DDevice9* g_device );
 		void g_warp_viewport( IDirect3DDevice9* g_device, sdk::vec2_t g_size );
+		int g_warp_imgui( HWND g_handle_window, IDirect3DDevice9* g_device );
 
 		BOOL g_create_device( HWND g_handle_window );
 		ATOM g_register_window( HINSTANCE g_instance, LPCTSTR g_name );

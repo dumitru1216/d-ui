@@ -149,3 +149,18 @@ BOOL ctx::impl::g_show_window( HWND g_hwnd, int g_n_cmd_show ) {
 BOOL ctx::impl::g_update_window( HWND g_hwnd ) {
     return UpdateWindow( g_hwnd );
 }
+
+/* warper PeekMessage */
+BOOL ctx::impl::g_peek_message( LPMSG g_lp_msg, HWND g_hwnd, UINT g_w_msg_filter_min, UINT g_w_msg_filter_max,
+                     UINT g_w_remove_msg ) {
+    return PeekMessage( g_lp_msg, g_hwnd, g_w_msg_filter_min, g_w_msg_filter_max, g_w_remove_msg );
+}
+
+/* warper message functions */ 
+BOOL ctx::impl::g_translate_message( const MSG* g_lp_msg ) {
+    return TranslateMessage( g_lp_msg );
+}
+
+LRESULT ctx::impl::g_dispatch_message( const MSG* g_lp_msg ) {
+    return DispatchMessage( g_lp_msg );
+}

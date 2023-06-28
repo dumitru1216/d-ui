@@ -33,6 +33,22 @@ int main( HINSTANCE g_instance, HINSTANCE g_prev_instance,
 	ctx::g_context.get( )->g_show_window( g_window_handle, SW_SHOWDEFAULT );
 	ctx::g_context.get( )->g_update_window( g_window_handle );	
 
+	/* warp imgui */
+	entry::g_entry.get( )->g_warp_imgui( g_window_handle, g_device_handle );
+
+	/* mem handler */
+	MSG g_msg{};
+	ctx::g_context.get( )->g_clean_memory( &g_msg, sizeof( g_msg ) );
+
+	/* loop msg */
+	while ( g_msg.message != WM_QUIT ) {
+		if ( ctx::g_context.get( )->g_peek_message( &g_msg, NULL, 0U, 0U, PM_REMOVE ) ) {
+			ctx::g_context.get( )->g_translate_message( &g_msg );
+			ctx::g_context.get( )->g_dispatch_message( &g_msg );
+			continue;
+		}
+	}
+
 	/* clean again */
 	entry::g_entry.get( )->g_clean_device( );
 
@@ -240,4 +256,20 @@ ATOM entry::impl::g_init_window( HINSTANCE g_instance, LPCTSTR g_class_name, LPC
 /* as i said that we are going to initialize it */
 LRESULT CALLBACK g_window_handler( HWND g_window, UINT g_msg, WPARAM g_wp, LPARAM g_lp ) {
 	return ctx::g_context.get( )->g_def_window_proc( g_window, g_msg, g_wp, g_lp );
+}
+
+int entry::impl::g_warp_imgui( HWND g_handle_window, IDirect3DDevice9* g_device ) {
+	IMGUI_CHECKVERSION( );
+
+	ImGui::CreateContext( );
+	ImGuiIO& io = ImGui::GetIO( );
+	ImGui::StyleColorsDark( );
+
+	ImGui_ImplWin32_Init( g_handle_window );
+	ImGui_ImplDX9_Init( g_device );
+
+	ImFontConfig font_config;
+	font_config.OversampleH = 1;
+	font_config.OversampleV = 1;
+	font_config.PixelSnapH = 1;
 }

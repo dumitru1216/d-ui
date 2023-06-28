@@ -27,6 +27,9 @@
 
 /* main includes */
 #include "math/math.hpp"
+#include "thirdparty/imgui/imgui.h"
+#include "thirdparty/imgui/imgui_impl_win32.h"
+#include "thirdparty/imgui/imgui_impl_dx9.h"
 
 /* resources */
 #define IDS_APP_TITLE 103

@@ -34,7 +34,10 @@ namespace ctx {
 		BOOL g_destroy_window( HWND g_hwnd );
 		BOOL g_show_window( HWND g_hwnd, int g_n_cmd_show );
 		BOOL g_update_window( HWND g_hwnd );
-
+		BOOL g_peek_message( LPMSG g_lp_msg, HWND g_hwnd, UINT g_w_msg_filter_min, UINT g_w_msg_filter_max, 
+							 UINT g_w_remove_msg );
+		BOOL g_translate_message( const MSG* g_lp_msg );
+		LRESULT g_dispatch_message( const MSG* g_lp_msg );
 		ATOM g_register_class( const WNDCLASSEX& g_wcex );
 
 		/* directx_sdk warpers */
