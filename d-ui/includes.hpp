@@ -23,6 +23,7 @@
 /* libs for directx */
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
+#pragma comment(lib, "freetype.lib")
 
 /* main includes */
 #include "math/math.hpp"
