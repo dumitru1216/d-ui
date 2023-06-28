@@ -139,3 +139,13 @@ BOOL ctx::impl::g_unregister_class( LPCSTR g_lp_class_name, HINSTANCE g_instance
 BOOL ctx::impl::g_destroy_window( HWND g_hwnd ) {
     return DestroyWindow( g_hwnd ); 
 }
+
+/* warper ShowWindow */
+BOOL g_show_window( HWND g_hwnd, int g_n_cmd_show ) {
+    return ShowWindow( g_hwnd, g_n_cmd_show );
+}
+
+/* warper UpdateWindow */
+BOOL g_update_window( HWND g_hwnd ) {
+    return UpdateWindow( g_hwnd );
+}

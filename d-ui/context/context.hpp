@@ -32,6 +32,9 @@ namespace ctx {
 		BOOL g_take_window_rect( HWND g_window_handle, RECT* g_screen_rect );
 		BOOL g_unregister_class( LPCSTR g_lp_class_name, HINSTANCE g_instance );
 		BOOL g_destroy_window( HWND g_hwnd );
+		BOOL g_show_window( HWND g_hwnd, int g_n_cmd_show );
+		BOOL g_update_window( HWND g_hwnd );
+
 		ATOM g_register_class( const WNDCLASSEX& g_wcex );
 
 		/* directx_sdk warpers */

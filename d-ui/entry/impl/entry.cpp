@@ -29,6 +29,10 @@ int main( HINSTANCE g_instance, HINSTANCE g_prev_instance,
 		return 0;
 	}
 
+	/* window updating */
+	ctx::g_context.get( )->g_show_window( g_window_handle, SW_SHOWDEFAULT );
+	ctx::g_context.get( )->g_update_window( g_window_handle );	
+
 	/* clean again */
 	entry::g_entry.get( )->g_clean_device( );
 
