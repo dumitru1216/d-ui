@@ -42,3 +42,17 @@ BOOL entry::impl::g_create_device( HWND handle_window ) {
 	/* return now */
 	return TRUE;
 }
+
+void entry::impl::g_setup_rendering_state( std::function<void( )> g_function ) {
+	IDirect3DStateBlock9* directx_state_block{ NULL }; /* im going to initialize it directly */
+
+	/*
+		if the context's g_create_state_block function returns a value less than 0 when called with g_device_handle, D3DSBT_ALL, 
+		and directx_state_block as arguments, then return from the current function.
+	*/
+	if ( ctx::g_context.get( )->g_create_state_block( &g_device_handle, D3DSBT_ALL, directx_state_block ) < 0 ) {
+		return;
+	}
+
+	/* display size */
+}

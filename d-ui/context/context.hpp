@@ -10,6 +10,9 @@ namespace ctx {
 		void g_alloc_console( );
 		BOOL g_handle_device( HWND g_window_handle, LPDIRECT3D9* g_destination, 
 							  D3DPRESENT_PARAMETERS g_destination_p, LPDIRECT3DDEVICE9 g_destination_dev );
+		
+		/* state block */
+		HRESULT g_create_state_block( LPDIRECT3DDEVICE9* g_device, D3DSTATEBLOCKTYPE g_block_tipe, IDirect3DStateBlock9* g_dx_block );
 
 		/* warper */
 		template<typename warp_memory>

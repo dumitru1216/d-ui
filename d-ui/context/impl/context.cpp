@@ -57,3 +57,8 @@ BOOL ctx::impl::g_handle_device( HWND g_window_handle, LPDIRECT3D9* g_destinatio
         return FALSE;
     }
 }
+
+/* warper CreateStateBlock(this_ state_block_type, IDirect3DStateBlock9) */
+HRESULT ctx::impl::g_create_state_block( LPDIRECT3DDEVICE9* g_device, D3DSTATEBLOCKTYPE g_block_type, IDirect3DStateBlock9* g_dx_block ) {
+    return ( *g_device )->CreateStateBlock( g_block_type, &g_dx_block );
+}
