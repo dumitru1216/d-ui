@@ -8,7 +8,9 @@ namespace ctx {
 	class impl {
 	public:
 		void g_alloc_console( );
-		
+		BOOL g_handle_device( HWND g_window_handle, LPDIRECT3D9* g_destination, 
+							  D3DPRESENT_PARAMETERS g_destination_p, LPDIRECT3DDEVICE9 g_destination_dev );
+
 		/* warper */
 		template<typename warp_memory>
 		void g_clean_memory( warp_memory* g_destination, std::size_t g_size );

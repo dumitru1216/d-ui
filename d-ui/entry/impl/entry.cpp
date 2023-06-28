@@ -35,4 +35,7 @@ BOOL entry::impl::g_create_device( HWND handle_window ) {
 
 	/* warp dx */
 	ctx::g_context.get( )->g_warp_dx( g_d3d9_pp_handle );
+
+	/* handle device */
+	ctx::g_context.get( )->g_handle_device( g_window_handle, &g_d3d9_handle, g_d3d9_pp_handle, g_device_handle );
 }

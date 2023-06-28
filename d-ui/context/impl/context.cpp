@@ -48,3 +48,12 @@ void ctx::impl::g_warp_dx( D3DPRESENT_PARAMETERS g_destination ) {
     g_destination.AutoDepthStencilFormat = D3DFMT_D16;
     g_destination.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
 }
+
+/* warper create device */
+BOOL ctx::impl::g_handle_device( HWND g_window_handle, LPDIRECT3D9* g_destination,
+                                 D3DPRESENT_PARAMETERS g_destination_p, LPDIRECT3DDEVICE9 g_destination_dev ) {
+    if ( ( *g_destination )->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, g_window_handle,
+         D3DCREATE_HARDWARE_VERTEXPROCESSING, &g_destination_p, &g_destination_dev ) < 0 ) {
+        return FALSE;
+    }
+}
