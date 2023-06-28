@@ -27,3 +27,8 @@ void ctx::impl::g_release_device_pointer( LPDIRECT3D9* g_device_pointer ) {
         *g_device_pointer = nullptr;
     }
 }
+
+/* warper Direct3DCreate9 */
+LPDIRECT3D9 ctx::impl::g_create_device( std::uint32_t g_sdk_version ) {
+    return Direct3DCreate9( g_sdk_version );
+}
