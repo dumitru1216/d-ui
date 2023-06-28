@@ -1,0 +1,11 @@
+
+*.db-shm
+*.db-wal
+*.opendb
+*.db
+*.lock
+*.vsidx
+*.log
+*.recipe
+*.lastbuildstate
+.vs/d-ui/v17/.suo
