@@ -9,3 +9,4 @@
 *.recipe
 *.lastbuildstate
 .vs/d-ui/v17/.suo
+*.ipch
