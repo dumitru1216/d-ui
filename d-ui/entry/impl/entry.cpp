@@ -258,7 +258,7 @@ LRESULT CALLBACK g_window_handler( HWND g_window, UINT g_msg, WPARAM g_wp, LPARA
 	return ctx::g_context.get( )->g_def_window_proc( g_window, g_msg, g_wp, g_lp );
 }
 
-int entry::impl::g_warp_imgui( HWND g_handle_window, IDirect3DDevice9* g_device ) {
+void entry::impl::g_warp_imgui( HWND g_handle_window, IDirect3DDevice9* g_device ) {
 	IMGUI_CHECKVERSION( );
 
 	ImGui::CreateContext( );
