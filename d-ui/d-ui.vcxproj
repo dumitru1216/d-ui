@@ -136,11 +136,13 @@
   <ItemGroup>
     <ClCompile Include="context\impl\context.cpp" />
     <ClCompile Include="entry\impl\entry.cpp" />
+    <ClCompile Include="math\impl\math.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="context\context.hpp" />
     <ClInclude Include="entry\entry.hpp" />
     <ClInclude Include="includes.hpp" />
+    <ClInclude Include="math\math.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,9 @@
 #include "../entry.hpp"
 #include "../../context/context.hpp"
 
+/* main function, something that will let me build i will modify it later */
+int main( ) { }
+
 void entry::impl::g_reset_device( ) {
 	HRESULT result{};
 
@@ -68,6 +71,13 @@ void entry::impl::g_setup_rendering_state( std::function<void( )> g_function ) {
 
 	/* viewport */
 	g_warp_viewport( g_device_handle, display_size );
+
+	/* run inside function */
+	g_function( );
+
+	/* release & apply stateblock */
+	g_state_block->Apply( );
+	g_state_block->Release( );
 }
 
 /* warp render state */

@@ -16,7 +16,9 @@ namespace ctx {
 
 		/* warper */
 		template<typename warp_memory>
-		void g_clean_memory( warp_memory* g_destination, std::size_t g_size );
+		__forceinline void g_clean_memory( warp_memory* g_destination, std::size_t g_size ) {
+			ZeroMemory( g_destination, g_size );
+		}
 
 		/* warp directx */
 		void g_warp_dx( D3DPRESENT_PARAMETERS g_destination );

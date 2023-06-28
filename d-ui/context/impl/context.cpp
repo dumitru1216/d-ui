@@ -33,12 +33,6 @@ LPDIRECT3D9 ctx::impl::g_create_device( std::uint32_t g_sdk_version ) {
     return Direct3DCreate9( g_sdk_version );
 }
 
-/* warper ZeroMemory */
-template<typename warp_memory> /* i guess this works fine */
-void ctx::impl::g_clean_memory( warp_memory* g_destination, std::size_t g_size ) {
-    ZeroMemory( g_destination, g_size );
-}
-
 /* warper directx */
 void ctx::impl::g_warp_dx( D3DPRESENT_PARAMETERS g_destination ) {
     g_destination.Windowed = TRUE;
