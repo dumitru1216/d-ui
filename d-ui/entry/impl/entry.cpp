@@ -38,4 +38,7 @@ BOOL entry::impl::g_create_device( HWND handle_window ) {
 
 	/* handle device */
 	ctx::g_context.get( )->g_handle_device( g_window_handle, &g_d3d9_handle, g_d3d9_pp_handle, g_device_handle );
+
+	/* return now */
+	return TRUE;
 }
