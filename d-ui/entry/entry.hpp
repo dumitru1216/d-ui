@@ -12,6 +12,7 @@ namespace entry {
 	class impl {
 	public:
 		void g_reset_device( );
+		void g_clean_device( );
 	};
 	inline const auto g_entry = std::make_unique< impl >( );
 }
