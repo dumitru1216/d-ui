@@ -78,12 +78,11 @@ BOOL entry::impl::g_create_device( HWND handle_window ) {
 	ctx::g_context.get( )->g_warp_dx( g_d3d9_pp_handle );
 
 	/* handle device */
-	//ctx::g_context.get( )->create_device( g_d3d9_handle,  );
 
-	if ( ctx::g_context.get( )->create_device( g_d3d9_handle, D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, g_window_handle, 
-		 D3DCREATE_HARDWARE_VERTEXPROCESSING, &g_d3d9_pp_handle, &g_device_handle ) < 0 )
+	if ( ctx::g_context.get( )->g_create_device_window( g_d3d9_handle, D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, g_window_handle,
+		 D3DCREATE_HARDWARE_VERTEXPROCESSING, &g_d3d9_pp_handle, &g_device_handle ) < 0 ) {
 		return FALSE;
-
+	}
 
 	/* return now */
 	return TRUE;

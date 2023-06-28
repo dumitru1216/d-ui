@@ -44,7 +44,7 @@ void ctx::impl::g_warp_dx( D3DPRESENT_PARAMETERS g_destination ) {
 }
 
 /* warper create device */
-HRESULT ctx::impl::create_device( IDirect3D9* g_p_d3d, UINT g_adapter, D3DDEVTYPE g_device_type, HWND g_h_focus_window,
+HRESULT ctx::impl::g_create_device_window( IDirect3D9* g_p_d3d, UINT g_adapter, D3DDEVTYPE g_device_type, HWND g_h_focus_window,
                        DWORD g_behavior_flags, D3DPRESENT_PARAMETERS* g_presentation_parameters, IDirect3DDevice9** g_pp_device ) {
     if ( !g_p_d3d ) 
         return NULL;
