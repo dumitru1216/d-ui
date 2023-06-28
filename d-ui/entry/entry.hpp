@@ -10,7 +10,8 @@ static D3DPRESENT_PARAMETERS g_d3d9_pp_handle = {};
 /* namespace and class */
 namespace entry {
 	class impl {
-
+	public:
+		void g_reset_device( );
 	};
 	inline const auto g_entry = std::make_unique< impl >( );
 }

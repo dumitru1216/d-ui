@@ -10,3 +10,8 @@
 *.lastbuildstate
 .vs/d-ui/v17/.suo
 *.ipch
+*.tlog
+*.pdb
+*.ipdb
+*.iobj
+*.obj
