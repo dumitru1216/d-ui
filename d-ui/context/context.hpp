@@ -10,6 +10,7 @@ namespace ctx {
 		void g_alloc_console( );
 		
 		/* functions warper */
+		HRESULT g_reset_device( D3DPRESENT_PARAMETERS reset_parrameter );
 	};
 	inline const auto g_context = std::make_unique< impl >( );
 }
