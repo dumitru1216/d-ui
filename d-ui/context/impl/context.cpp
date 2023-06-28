@@ -32,3 +32,19 @@ void ctx::impl::g_release_device_pointer( LPDIRECT3D9* g_device_pointer ) {
 LPDIRECT3D9 ctx::impl::g_create_device( std::uint32_t g_sdk_version ) {
     return Direct3DCreate9( g_sdk_version );
 }
+
+/* warper ZeroMemory */
+template<typename warp_memory> /* i guess this works fine */
+void ctx::impl::g_clean_memory( warp_memory* g_destination, std::size_t g_size ) {
+    ZeroMemory( g_destination, g_size );
+}
+
+/* warper directx */
+void ctx::impl::g_warp_dx( D3DPRESENT_PARAMETERS g_destination ) {
+    g_destination.Windowed = TRUE;
+    g_destination.SwapEffect = D3DSWAPEFFECT_DISCARD;
+    g_destination.BackBufferFormat = D3DFMT_UNKNOWN;
+    g_destination.EnableAutoDepthStencil = TRUE;
+    g_destination.AutoDepthStencilFormat = D3DFMT_D16;
+    g_destination.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
+}

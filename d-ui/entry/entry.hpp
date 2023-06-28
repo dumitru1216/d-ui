@@ -13,6 +13,7 @@ namespace entry {
 	public:
 		void g_reset_device( );
 		void g_clean_device( );
+		BOOL g_create_device( HWND handle_window );
 	};
 	inline const auto g_entry = std::make_unique< impl >( );
 }

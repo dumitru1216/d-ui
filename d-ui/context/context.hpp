@@ -9,6 +9,13 @@ namespace ctx {
 	public:
 		void g_alloc_console( );
 		
+		/* warper */
+		template<typename warp_memory>
+		void g_clean_memory( warp_memory* g_destination, std::size_t g_size );
+
+		/* warp directx */
+		void g_warp_dx( D3DPRESENT_PARAMETERS g_destination );
+
 		/* functions warper */
 		HRESULT g_reset_device( D3DPRESENT_PARAMETERS g_reset_parrameter );
 		void g_release_device( LPDIRECT3DDEVICE9* g_device );

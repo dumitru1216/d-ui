@@ -21,3 +21,18 @@ void entry::impl::g_clean_device( ) {
 		ctx::g_context.get( )->g_release_device_pointer( &g_d3d9_handle );
 	}
 }
+
+BOOL entry::impl::g_create_device( HWND handle_window ) {
+	if ( ( g_d3d9_handle = ctx::g_context.get( )->g_create_device( D3D_SDK_VERSION ) ) == 0 ) {
+		return false;
+	}
+
+	/*
+		zeros out the memory of g_d3d9pp by setting all its bytes to zero.
+		the size of g_d3d9pp is determined by sizeof( g_d3d9pp ).
+	*/
+	ctx::g_context.get( )->g_clean_memory( &g_d3d9_handle, sizeof( g_d3d9_handle ) );
+
+	/* warp dx */
+	ctx::g_context.get( )->g_warp_dx( g_d3d9_pp_handle );
+}
