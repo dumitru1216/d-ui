@@ -62,3 +62,15 @@ BOOL ctx::impl::g_handle_device( HWND g_window_handle, LPDIRECT3D9* g_destinatio
 HRESULT ctx::impl::g_create_state_block( LPDIRECT3DDEVICE9* g_device, D3DSTATEBLOCKTYPE g_block_type, IDirect3DStateBlock9* g_dx_block ) {
     return ( *g_device )->CreateStateBlock( g_block_type, &g_dx_block );
 }
+
+/* warper GetClientRect */
+BOOL ctx::impl::g_take_client_rect( HWND g_window_handle, RECT* g_screen_rect ) { /*
+        might be an issue the operator from g_screen_rect, we are going to see later
+    */
+    if ( g_window_handle && g_screen_rect ) { /* safety condition */
+        return GetClientRect( g_window_handle, g_screen_rect );
+    }
+
+    /* for any other values we are going to return false */
+    return FALSE;
+}
