@@ -17,7 +17,9 @@ namespace entry {
 		void g_warp_render_state( IDirect3DDevice9* g_device );
 		void g_warp_viewport( IDirect3DDevice9* g_device, sdk::vec2_t g_size );
 
-		BOOL g_create_device( HWND handle_window );
+		BOOL g_create_device( HWND g_handle_window );
+		ATOM g_register_window( HINSTANCE g_instance, LPCTSTR g_name );
+		ATOM g_init_window( HINSTANCE g_instance, LPCTSTR g_class_name, LPCTSTR g_title );
 	};
 	inline const auto g_entry = std::make_unique< impl >( );
 }

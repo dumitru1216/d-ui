@@ -124,3 +124,74 @@ void entry::impl::g_warp_viewport( IDirect3DDevice9* g_device, sdk::vec2_t g_siz
 	/* set this motherfucker */
 	ctx::g_context.get( )->g_set_viewport( g_device, &g_viewport );
 }
+
+LRESULT CALLBACK g_window_handler( HWND g_window, UINT g_msg, WPARAM g_wp, LPARAM g_lp ); /* we are going to init this a little bit down */
+ATOM entry::impl::g_register_window( HINSTANCE g_instance, LPCTSTR g_name ) {
+	/*
+		registers a window class by initializing a wndclassex structure with the following properties:
+
+		cbsize is set to the size of wndclassex structure
+		style is set to cs_hredraw | cs_vredraw
+		lpfnwndproc is set to g_window_handler, which represents the window procedure
+		cbclsextra and cbwndextra are both set to 0
+		hinstance is set to g_instance, representing the application instance handle
+		hicon is set by loading the icon with resource id idi_guitest from the g_instance
+		hcursor is set to the arrow cursor
+		hbrbackground is set to the color of the window background
+		lpszmenuname is set to the resource id idc_guitest, representing the menu for the window
+		lpszclassname is set to g_name, representing the window class name
+		hiconsm is set by loading the small icon with resource id idi_small from the hinstance
+	*/
+	WNDCLASSEX g_wcex{};
+
+	g_wcex.cbSize = sizeof( WNDCLASSEX );
+	g_wcex.style = CS_HREDRAW | CS_VREDRAW;
+	g_wcex.lpfnWndProc = g_window_handler;
+	g_wcex.cbClsExtra = 0;
+	g_wcex.cbWndExtra = 0;
+	g_wcex.hInstance = g_instance;
+	g_wcex.hIcon = LoadIcon( g_instance, MAKEINTRESOURCE( IDI_GUITEST ) );
+	g_wcex.hCursor = LoadCursor( nullptr, IDC_ARROW );
+	g_wcex.hbrBackground = ( HBRUSH )( COLOR_WINDOW + 1 );
+	g_wcex.lpszMenuName = MAKEINTRESOURCE( IDC_GUITEST );
+	g_wcex.lpszClassName = g_name;
+	g_wcex.hIconSm = LoadIcon( g_wcex.hInstance, MAKEINTRESOURCE( IDI_SMALL ) );
+
+	/* register this motherfucker */
+	return ctx::g_context.get( )->g_register_class( g_wcex );
+}
+
+ATOM entry::impl::g_init_window( HINSTANCE g_instance, LPCTSTR g_class_name, LPCTSTR g_title ) {
+	/*
+		initializes g_screen_rect as an empty rect structure
+		calls the g_take_window_rect function of g_context to get the rectangle of the desktop window and stores it in g_screen_rect
+
+		creates a window with the following parameters:
+
+		ws_ex_appwindow style extended window style
+		g_class_name as the window class name
+		g_title as the window title
+		ws_popup style for the window
+		g_screen_rect.left, g_screen_rect.top, g_screen_rect.right, g_screen_rect.bottom as the window position and size
+		null as the parent window
+		null as the menu
+		g_instance as the application instance handle
+		null as the window creation data
+		if g_window_handle is not valid (null), returns false
+		otherwise, returns true
+	*/
+	RECT g_screen_rect{};
+	ctx::g_context.get( )->g_take_window_rect( GetDesktopWindow( ), &g_screen_rect );
+
+	/* finnaly we initialize our window */
+	g_window_handle = ctx::g_context.get( )->g_create_window_ex( WS_EX_APPWINDOW, g_class_name, g_title, WS_POPUP, g_screen_rect.left, g_screen_rect.top,
+																 g_screen_rect.right, g_screen_rect.bottom, NULL, NULL, g_instance, NULL );
+
+	if ( !g_window_handle ) { return FALSE; }
+	return TRUE;
+}
+
+/* as i said that we are going to initialize it */
+LRESULT CALLBACK g_window_handler( HWND g_window, UINT g_msg, WPARAM g_wp, LPARAM g_lp ) {
+	return ctx::g_context.get( )->g_def_window_proc( g_window, g_msg, g_wp, g_lp );
+}

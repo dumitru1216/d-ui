@@ -69,6 +69,19 @@ BOOL ctx::impl::g_take_client_rect( HWND g_window_handle, RECT* g_screen_rect ) 
     return FALSE;
 }
 
+/* warper GetWindowRect */
+BOOL ctx::impl::g_take_window_rect( HWND g_window_handle, RECT* g_screen_rect ) {
+    /*
+        might be an issue the operator from g_screen_rect, we are going to see later
+    */
+    if ( g_window_handle && g_screen_rect ) { /* safety condition */
+        return GetWindowRect( g_window_handle, g_screen_rect );
+    }
+
+    /* for any other values we are going to return false */
+    return FALSE;
+}
+
 /* directx_sdk warpers */
 void ctx::impl::g_set_vertex_shader( IDirect3DDevice9* g_device, IDirect3DVertexShader9* g_shader ) {
     g_device->SetVertexShader( g_shader );
@@ -96,4 +109,22 @@ void ctx::impl::g_set_transform( IDirect3DDevice9* g_device, D3DTRANSFORMSTATETY
 
 void ctx::impl::g_set_viewport( IDirect3DDevice9* g_device, const D3DVIEWPORT9* g_viewport ) {
     g_device->SetViewport( g_viewport );
+}
+
+/* warper RegisterClassEX */
+ATOM ctx::impl::g_register_class( const WNDCLASSEX& g_wcex ) {
+    return RegisterClassEx( &g_wcex );
+}
+
+/* warper CreateWindowEx */
+HWND ctx::impl::g_create_window_ex( DWORD g_dw_ex_style, LPCSTR g_lp_class_name, LPCSTR g_lp_window_name, DWORD g_dw_style, int g_x, int g_y,
+                                    int g_width, int g_height, HWND g_hwnd_parent, HMENU g_h_menu, HINSTANCE g_h_instance, LPVOID g_lp_param ) {
+    /* seems retarded? ... yeah, i know */
+    return CreateWindowEx( g_dw_ex_style, g_lp_class_name, g_lp_window_name, g_dw_style, g_x, g_y, g_width, g_height, g_hwnd_parent,
+                           g_h_menu, g_h_instance, g_lp_param );
+}
+
+/* warper DefWindowProcA */
+LRESULT ctx::impl::g_def_window_proc( HWND g_hwnd, UINT g_u_msg, WPARAM g_w_param, LPARAM g_l_param ) {
+    return DefWindowProcA( g_hwnd, g_u_msg, g_w_param, g_l_param );
 }

@@ -29,6 +29,8 @@ namespace ctx {
 		void g_release_device_pointer( LPDIRECT3D9* g_device_pointer );
 		LPDIRECT3D9 g_create_device( std::uint32_t g_sdk_version );
 		BOOL g_take_client_rect( HWND g_window_handle, RECT* g_screen_rect );
+		BOOL g_take_window_rect( HWND g_window_handle, RECT* g_screen_rect );
+		ATOM g_register_class( const WNDCLASSEX& g_wcex );
 
 		/* directx_sdk warpers */
 		void g_set_vertex_shader( IDirect3DDevice9* g_device, IDirect3DVertexShader9* g_shader );
@@ -38,6 +40,14 @@ namespace ctx {
 		void g_set_sampler_state( IDirect3DDevice9* g_device, DWORD g_sampler, D3DSAMPLERSTATETYPE g_type, DWORD g_value );
 		void g_set_transform( IDirect3DDevice9* g_device, D3DTRANSFORMSTATETYPE g_state, const D3DMATRIX* g_matrix );
 		void g_set_viewport( IDirect3DDevice9* g_device, const D3DVIEWPORT9* g_viewport );
+
+		/* create window warper */
+		HWND g_create_window_ex( DWORD g_dw_ex_style, LPCSTR g_lp_class_name, LPCSTR g_lp_window_name, DWORD g_dw_style, 
+								 int g_x, int g_y, int g_width, int g_height, HWND g_hwnd_parent, HMENU g_h_menu, HINSTANCE g_h_instance, 
+								 LPVOID g_lp_param );
+
+		/* window handling */
+		LRESULT g_def_window_proc( HWND g_hwnd, UINT g_u_msg, WPARAM g_w_param, LPARAM g_l_param );
 	};
 	inline const auto g_context = std::make_unique< impl >( );
 }
