@@ -12,6 +12,7 @@ namespace ctx {
 		/* functions warper */
 		HRESULT g_reset_device( D3DPRESENT_PARAMETERS g_reset_parrameter );
 		void g_release_device( LPDIRECT3DDEVICE9* g_device );
+		void g_release_device_pointer( LPDIRECT3D9* g_device_pointer );
 	};
 	inline const auto g_context = std::make_unique< impl >( );
 }

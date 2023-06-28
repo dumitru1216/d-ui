@@ -18,3 +18,12 @@ void ctx::impl::g_release_device( LPDIRECT3DDEVICE9* g_device ) {
         *g_device = nullptr;
     }
 }
+
+/* warper LPDIRECT3D9->Release() */
+void ctx::impl::g_release_device_pointer( LPDIRECT3D9* g_device_pointer ) {
+    /* this might work, its the first time im doing/trying to get properly warpers */
+    if ( g_device_pointer && *g_device_pointer ) {
+        ( *g_device_pointer )->Release( );
+        *g_device_pointer = nullptr;
+    }
+}

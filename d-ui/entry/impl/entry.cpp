@@ -15,6 +15,9 @@ void entry::impl::g_clean_device( ) {
 		if g_d3d9_handle is not NULL, releases g_d3d9_handle and sets it to NULL.
 	*/
 	if ( g_device_handle ) {
-		
+		ctx::g_context.get( )->g_release_device( &g_device_handle );
+	}
+	if ( g_d3d9_handle ) { 
+		ctx::g_context.get( )->g_release_device_pointer( &g_d3d9_handle );
 	}
 }
