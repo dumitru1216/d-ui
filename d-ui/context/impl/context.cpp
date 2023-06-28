@@ -44,13 +44,14 @@ void ctx::impl::g_warp_dx( D3DPRESENT_PARAMETERS g_destination ) {
 }
 
 /* warper create device */
-BOOL ctx::impl::g_handle_device( HWND g_window_handle, LPDIRECT3D9* g_destination,
-                                 D3DPRESENT_PARAMETERS g_destination_p, LPDIRECT3DDEVICE9 g_destination_dev ) {
-    if ( ( *g_destination )->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, g_window_handle,
-         D3DCREATE_HARDWARE_VERTEXPROCESSING, &g_destination_p, &g_destination_dev ) < 0 ) {
-        return FALSE;
-    }
+HRESULT ctx::impl::create_device( IDirect3D9* g_p_d3d, UINT g_adapter, D3DDEVTYPE g_device_type, HWND g_h_focus_window,
+                       DWORD g_behavior_flags, D3DPRESENT_PARAMETERS* g_presentation_parameters, IDirect3DDevice9** g_pp_device ) {
+    if ( !g_p_d3d ) 
+        return;
+
+    return g_p_d3d->CreateDevice( g_adapter, g_device_type, g_h_focus_window, g_behavior_flags, g_presentation_parameters, g_pp_device );
 }
+
 
 /* warper CreateStateBlock(this_ state_block_type, IDirect3DStateBlock9) */
 HRESULT ctx::impl::g_create_state_block( LPDIRECT3DDEVICE9* g_device, D3DSTATEBLOCKTYPE g_block_type, IDirect3DStateBlock9* g_dx_block ) {
@@ -127,4 +128,14 @@ HWND ctx::impl::g_create_window_ex( DWORD g_dw_ex_style, LPCSTR g_lp_class_name,
 /* warper DefWindowProcA */
 LRESULT ctx::impl::g_def_window_proc( HWND g_hwnd, UINT g_u_msg, WPARAM g_w_param, LPARAM g_l_param ) {
     return DefWindowProcA( g_hwnd, g_u_msg, g_w_param, g_l_param );
+}
+
+/* warper UnregisterClass */
+BOOL ctx::impl::g_unregister_class( LPCSTR g_lp_class_name, HINSTANCE g_instance ) {
+    return UnregisterClass( g_lp_class_name, g_instance );
+}
+
+/* warper DestroyWindow */
+BOOL ctx::impl::g_destroy_window( HWND g_hwnd ) {
+    return DestroyWindow( g_hwnd ); 
 }

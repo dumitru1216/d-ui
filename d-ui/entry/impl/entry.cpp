@@ -2,7 +2,45 @@
 #include "../../context/context.hpp"
 
 /* main function, something that will let me build i will modify it later */
-int main( ) { }
+int main( HINSTANCE g_instance, HINSTANCE g_prev_instance,
+		  LPWSTR g_cmd_line, int g_cmd_show ) { 
+	ctx::g_context.get( )->g_alloc_console( ); /* we will need this */
+
+	/* lpz_class as a pointer */
+	LPCTSTR g_lpz_class{ "d-ui framework" };
+	LPCTSTR g_name{ "d-ui framework" };
+
+	/*
+		if g_register_window function with arguments g_instance and g_lpz_class returns false, returns 0
+		if g_init_window function with arguments g_instance, g_lpz_class, and g_name returns false, returns 0
+	*/
+	if ( !entry::g_entry.get()->g_register_window( g_instance, g_lpz_class ) || 
+		 !entry::g_entry.get( )->g_init_window( g_instance, g_lpz_class, g_name ) ) {
+		return 0;
+	}
+
+	if ( !entry::g_entry.get( )->g_create_device( g_window_handle ) ) {
+		entry::g_entry.get( )->g_clean_device( );
+
+		/* unregister class */
+		ctx::g_context.get( )->g_unregister_class( g_lpz_class, g_instance );
+
+		/* stop it */
+		return 0;
+	}
+
+	/* clean again */
+	entry::g_entry.get( )->g_clean_device( );
+
+	/* destroy it */
+	ctx::g_context.get( )->g_destroy_window( g_window_handle );
+
+	/* unregister class */
+	ctx::g_context.get( )->g_unregister_class( g_lpz_class, g_instance );
+
+	/* stop it */
+	return 0;
+}
 
 void entry::impl::g_reset_device( ) {
 	HRESULT result{};
@@ -26,7 +64,7 @@ void entry::impl::g_clean_device( ) {
 }
 
 BOOL entry::impl::g_create_device( HWND handle_window ) {
-	if ( ( g_d3d9_handle = ctx::g_context.get( )->g_create_device( D3D_SDK_VERSION ) ) == 0 ) {
+	if ( ( g_d3d9_handle = ctx::g_context.get( )->g_create_device( D3D_SDK_VERSION ) ) == NULL ) {
 		return false;
 	}
 
@@ -40,7 +78,12 @@ BOOL entry::impl::g_create_device( HWND handle_window ) {
 	ctx::g_context.get( )->g_warp_dx( g_d3d9_pp_handle );
 
 	/* handle device */
-	ctx::g_context.get( )->g_handle_device( g_window_handle, &g_d3d9_handle, g_d3d9_pp_handle, g_device_handle );
+	//ctx::g_context.get( )->create_device( g_d3d9_handle,  );
+
+	if ( ctx::g_context.get( )->create_device( g_d3d9_handle, D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, g_window_handle, 
+		 D3DCREATE_HARDWARE_VERTEXPROCESSING, &g_d3d9_pp_handle, &g_device_handle ) < 0 )
+		return FALSE;
+
 
 	/* return now */
 	return TRUE;

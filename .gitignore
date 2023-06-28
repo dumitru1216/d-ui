@@ -16,3 +16,7 @@
 *.iobj
 *.obj
 *.exe
+*.ilk
+*.enc
+*.exe
+*.idb

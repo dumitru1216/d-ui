@@ -8,9 +8,9 @@ namespace ctx {
 	class impl {
 	public:
 		void g_alloc_console( );
-		BOOL g_handle_device( HWND g_window_handle, LPDIRECT3D9* g_destination, 
-							  D3DPRESENT_PARAMETERS g_destination_p, LPDIRECT3DDEVICE9 g_destination_dev );
-		
+		HRESULT create_device( IDirect3D9* g_p_d3d, UINT g_adapter, D3DDEVTYPE g_device_type, HWND g_h_focus_window, 
+							   DWORD g_behavior_flags, D3DPRESENT_PARAMETERS* g_presentation_parameters, IDirect3DDevice9** g_pp_device );
+
 		/* state block */
 		HRESULT g_create_state_block( LPDIRECT3DDEVICE9* g_device, D3DSTATEBLOCKTYPE g_block_tipe, IDirect3DStateBlock9* g_dx_block );
 
@@ -30,6 +30,8 @@ namespace ctx {
 		LPDIRECT3D9 g_create_device( std::uint32_t g_sdk_version );
 		BOOL g_take_client_rect( HWND g_window_handle, RECT* g_screen_rect );
 		BOOL g_take_window_rect( HWND g_window_handle, RECT* g_screen_rect );
+		BOOL g_unregister_class( LPCSTR g_lp_class_name, HINSTANCE g_instance );
+		BOOL g_destroy_window( HWND g_hwnd );
 		ATOM g_register_class( const WNDCLASSEX& g_wcex );
 
 		/* directx_sdk warpers */
