@@ -57,4 +57,9 @@ void entry::impl::g_setup_rendering_state( std::function<void( )> g_function ) {
 	/* screen base */
 	RECT g_screen_rect{};
 	ctx::g_context.get( )->g_take_client_rect( g_window_handle, &g_screen_rect );
+
+	/* display size, we are going to directly initialize it */
+	sdk::vec2_t display_size{ sdk::vec2_t(
+		( float )( g_screen_rect.right - g_screen_rect.left ), ( float )( g_screen_rect.bottom - g_screen_rect.top )
+	) };
 }

@@ -74,3 +74,32 @@ BOOL ctx::impl::g_take_client_rect( HWND g_window_handle, RECT* g_screen_rect ) 
     /* for any other values we are going to return false */
     return FALSE;
 }
+
+/* directx_sdk warpers */
+void ctx::impl::g_set_vertex_shader( IDirect3DDevice9* g_device, IDirect3DVertexShader9* g_shader ) {
+    g_device->SetVertexShader( g_shader );
+}
+
+void ctx::impl::g_set_pixel_shader( IDirect3DDevice9* g_device, IDirect3DPixelShader9* g_shader ) {
+    g_device->SetPixelShader( g_shader );
+}
+
+void ctx::impl::g_set_render_state( IDirect3DDevice9* g_device, D3DRENDERSTATETYPE g_state, DWORD g_value ) {
+    g_device->SetRenderState( g_state, g_value );
+}
+
+void ctx::impl::g_set_texture_stage_state( IDirect3DDevice9* g_device, DWORD g_stage, D3DTEXTURESTAGESTATETYPE g_type, DWORD g_value ) {
+    g_device->SetTextureStageState( g_stage, g_type, g_value );
+}
+
+void ctx::impl::g_set_sampler_state( IDirect3DDevice9* g_device, DWORD g_sampler, D3DSAMPLERSTATETYPE g_type, DWORD g_value ) {
+    g_device->SetSamplerState( g_sampler, g_type, g_value );
+}
+
+void ctx::impl::g_set_transform( IDirect3DDevice9* g_device, D3DTRANSFORMSTATETYPE g_state, const D3DMATRIX* g_matrix ) {
+    g_device->SetTransform( g_state, g_matrix );
+}
+
+void ctx::impl::g_set_viewport( IDirect3DDevice9* g_device, const D3DVIEWPORT9* g_viewport ) {
+    g_device->SetViewport( g_viewport );
+}

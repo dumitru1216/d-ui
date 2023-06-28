@@ -25,3 +25,4 @@
 #pragma comment(lib, "d3dx9.lib")
 
 /* main includes */
+#include "math/math.hpp"
