@@ -141,11 +141,11 @@ BOOL ctx::impl::g_destroy_window( HWND g_hwnd ) {
 }
 
 /* warper ShowWindow */
-BOOL g_show_window( HWND g_hwnd, int g_n_cmd_show ) {
+BOOL ctx::impl::g_show_window( HWND g_hwnd, int g_n_cmd_show ) {
     return ShowWindow( g_hwnd, g_n_cmd_show );
 }
 
 /* warper UpdateWindow */
-BOOL g_update_window( HWND g_hwnd ) {
+BOOL ctx::impl::g_update_window( HWND g_hwnd ) {
     return UpdateWindow( g_hwnd );
 }
