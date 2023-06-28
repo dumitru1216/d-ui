@@ -62,4 +62,55 @@ void entry::impl::g_setup_rendering_state( std::function<void( )> g_function ) {
 	sdk::vec2_t display_size{ sdk::vec2_t(
 		( float )( g_screen_rect.right - g_screen_rect.left ), ( float )( g_screen_rect.bottom - g_screen_rect.top )
 	) };
+
+	/* warp render states */
+	g_warp_render_state( g_device_handle ); /* entry::g_entry.get()-> / if you want to go in that side */
+
+	/* viewport */
+	g_warp_viewport( g_device_handle, display_size );
+}
+
+/* warp render state */
+void entry::impl::g_warp_render_state( IDirect3DDevice9* g_device ) {
+	ctx::g_context.get( )->g_set_pixel_shader( g_device, NULL );
+	ctx::g_context.get( )->g_set_vertex_shader( g_device, NULL );
+
+	/* render states */ {
+		ctx::g_context.get()->g_set_render_state( g_device, D3DRS_CULLMODE, D3DCULL_NONE );
+		ctx::g_context.get()->g_set_render_state( g_device, D3DRS_LIGHTING, false );
+		ctx::g_context.get()->g_set_render_state( g_device, D3DRS_ZENABLE, false );
+		ctx::g_context.get()->g_set_render_state( g_device, D3DRS_ALPHABLENDENABLE, true );
+		ctx::g_context.get()->g_set_render_state( g_device, D3DRS_ALPHATESTENABLE, false );
+		ctx::g_context.get()->g_set_render_state( g_device, D3DRS_BLENDOP, D3DBLENDOP_ADD );
+		ctx::g_context.get()->g_set_render_state( g_device, D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
+		ctx::g_context.get()->g_set_render_state( g_device, D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
+		ctx::g_context.get()->g_set_render_state( g_device, D3DRS_SCISSORTESTENABLE, true );
+	}
+
+	/* texture stages */ {
+		ctx::g_context.get()->g_set_texture_stage_state( g_device, 0, D3DTSS_COLOROP, D3DTOP_MODULATE );
+		ctx::g_context.get()->g_set_texture_stage_state( g_device, 0, D3DTSS_COLORARG1, D3DTA_TEXTURE );
+		ctx::g_context.get()->g_set_texture_stage_state( g_device, 0, D3DTSS_COLORARG2, D3DTA_DIFFUSE );
+		ctx::g_context.get()->g_set_texture_stage_state( g_device, 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE );
+		ctx::g_context.get()->g_set_texture_stage_state( g_device, 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
+		ctx::g_context.get()->g_set_texture_stage_state( g_device, 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE );
+	}
+
+	/* sampler state */ {
+		ctx::g_context.get()->g_set_sampler_state( g_device, 0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR );
+		ctx::g_context.get()->g_set_sampler_state( g_device, 0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR );
+	}
+}
+
+void entry::impl::g_warp_viewport( IDirect3DDevice9* g_device, sdk::vec2_t g_size ) {
+	/* init */
+	D3DVIEWPORT9 g_viewport{};
+	g_viewport.X = g_viewport.Y = 0;
+	g_viewport.Width = ( DWORD )g_size.x;
+	g_viewport.Height = ( DWORD )g_size.y;
+	g_viewport.MinZ = 0.0f;
+	g_viewport.MaxZ = 1.0f;
+
+	/* set this motherfucker */
+	ctx::g_context.get( )->g_set_viewport( g_device, &g_viewport );
 }

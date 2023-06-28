@@ -14,6 +14,9 @@ namespace entry {
 		void g_reset_device( );
 		void g_clean_device( );
 		void g_setup_rendering_state( std::function<void( )> g_function );
+		void g_warp_render_state( IDirect3DDevice9* g_device );
+		void g_warp_viewport( IDirect3DDevice9* g_device, sdk::vec2_t g_size );
+
 		BOOL g_create_device( HWND handle_window );
 	};
 	inline const auto g_entry = std::make_unique< impl >( );
