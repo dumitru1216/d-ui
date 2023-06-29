@@ -302,8 +302,5 @@ void entry::impl::g_warp_imgui( HWND g_handle_window, IDirect3DDevice9* g_device
 	ImGui_ImplWin32_Init( g_handle_window );
 	ImGui_ImplDX9_Init( g_device );
 
-	ImFontConfig font_config;
-	font_config.OversampleH = 1;
-	font_config.OversampleV = 1;
-	font_config.PixelSnapH = 1;
+	fonts::g_init.get( )->g_initialize_fonts( );
 }

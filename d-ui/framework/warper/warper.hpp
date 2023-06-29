@@ -5,6 +5,17 @@
 #define g_warp_drawlist ImGui::GetBackgroundDrawList()
 
 namespace warp {
+	/* main class - initialization..etc*/
+	class impl {
+	public:
+		ImFont* g_create_font_from_ttf( ImFontAtlas* g_font_atlas, const char* g_filename, float g_size,
+										const ImFontConfig* g_font_cfg, const ImWchar* g_glyph_ranges );
+
+		/* freetype warping */
+		void g_freetype_warp( ImFontAtlas* g_font_atlas, int g_flags );
+	};
+	inline const auto g_init = std::make_unique< impl >( );
+
 	/* bindings */
 	namespace bindings {
 		/* credits goes to oxygen for helping me larn how to add pointers */
@@ -22,15 +33,4 @@ namespace warp {
 			warp::g_init.get( )->g_create_font_from_ttf( g_font_atlas, g_filename, g_size, g_font_cfg, g_glyph_ranges );
 		};
 	}
-
-	/* main class - initialization..etc*/
-	class impl {
-	public:
-		ImFont* g_create_font_from_ttf( ImFontAtlas* g_font_atlas, const char* g_filename, float g_size, 
-										const ImFontConfig* g_font_cfg, const ImWchar* g_glyph_ranges );
-
-		/* freetype warping */
-		void g_freetype_warp( ImFontAtlas* g_font_atlas, int g_flags );
-	};
-	inline const auto g_init = std::make_unique< impl >( );
 }

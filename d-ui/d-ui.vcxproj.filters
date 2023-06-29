@@ -12,6 +12,7 @@
     <ClCompile Include="thirdparty\imgui\imgui_tables.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui_widgets.cpp" />
     <ClCompile Include="framework\warper\impl\warper.cpp" />
+    <ClCompile Include="framework\fonts\impl\fonts.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entry\entry.hpp" />
@@ -29,5 +30,6 @@
     <ClInclude Include="thirdparty\imgui\imstb_truetype.h" />
     <ClInclude Include="framework\dui_includes.hpp" />
     <ClInclude Include="framework\warper\warper.hpp" />
+    <ClInclude Include="framework\fonts\fonts.hpp" />
   </ItemGroup>
 </Project>
