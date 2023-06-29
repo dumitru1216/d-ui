@@ -45,3 +45,6 @@
 #ifndef IDC_STATIC
 #define IDC_STATIC -1
 #endif
+
+/* pre_defines */
+#define g_clean_memory ZeroMemory

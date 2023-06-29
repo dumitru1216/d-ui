@@ -38,7 +38,7 @@ int main( HINSTANCE g_instance, HINSTANCE g_prev_instance,
 
 	/* mem handler */
 	MSG g_msg{};
-	ctx::g_context.get( )->g_clean_memory( &g_msg, sizeof( g_msg ) );
+	g_clean_memory( &g_msg, sizeof( g_msg ) );
 
 	/* loop msg */
 	while ( g_msg.message != WM_QUIT ) {
@@ -84,7 +84,9 @@ int main( HINSTANCE g_instance, HINSTANCE g_prev_instance,
 		}
 
 		/* handle packet loss - i will handle it tmr */
-
+		HRESULT result{ g_device_handle->Present( NULL, NULL, NULL, NULL ) };
+		if ( result == D3DERR_DEVICELOST && g_device_handle->TestCooperativeLevel( ) == D3DERR_DEVICENOTRESET )
+			entry::g_entry->g_reset_device( );
 	}
 
 	/* clean again */
@@ -122,42 +124,37 @@ void entry::impl::g_clean_device( ) {
 }
 
 BOOL entry::impl::g_create_device( HWND handle_window ) {
-	if ( ( g_d3d9_handle = ctx::g_context.get( )->g_create_device( D3D_SDK_VERSION ) ) == NULL ) {
-		return false;
+	if ( ( g_d3d9_handle = Direct3DCreate9( D3D_SDK_VERSION ) ) == NULL ) {
+		return FALSE;
 	}
 
 	/*
 		zeros out the memory of g_d3d9pp by setting all its bytes to zero.
 		the size of g_d3d9pp is determined by sizeof( g_d3d9pp ).
 	*/
-	ctx::g_context.get( )->g_clean_memory( &g_d3d9_handle, sizeof( g_d3d9_handle ) );
+	g_clean_memory( &g_d3d9_pp_handle, sizeof( g_d3d9_pp_handle ) );
 
 	/* warp dx */
-	ctx::g_context.get( )->g_warp_dx( g_d3d9_pp_handle );
+	ctx::g_context->g_warp_dx( &g_d3d9_pp_handle );
 
 	/* handle device */
-
-	if ( ctx::g_context.get( )->g_create_device_window( g_d3d9_handle, D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, g_window_handle,
-		 D3DCREATE_HARDWARE_VERTEXPROCESSING, &g_d3d9_pp_handle, &g_device_handle ) < 0 ) {
+	if ( g_init_device( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, g_window_handle, D3DCREATE_HARDWARE_VERTEXPROCESSING, &g_d3d9_pp_handle, &g_device_handle ) < 0 )
 		return FALSE;
-	}
 
-	/* return now */
+	/* now lets return true */
 	return TRUE;
 }
 
 void entry::impl::g_setup_rendering_state( std::function<void( )> g_function ) {
-	IDirect3DStateBlock9* g_state_block{ NULL }; /* im going to initialize it directly */
+	/* backup dx state */
+	IDirect3DStateBlock9* g_state_block{ NULL };
 
-	/*
-		if the context's g_create_state_block function returns a value less than 0 when called with g_device_handle, D3DSBT_ALL,
-		and directx_state_block as arguments, then return from the current function.
-	*/
-	if ( ctx::g_context.get( )->g_create_state_block( &g_device_handle, D3DSBT_ALL, g_state_block ) < 0 ) {
+	/* create state block */
+	if ( g_create_state_block( D3DSBT_ALL, &g_state_block ) < 0 ) {
 		return;
 	}
 
-	/* screen base */
+	/* get display size */
 	RECT g_screen_rect{};
 	ctx::g_context.get( )->g_take_client_rect( g_window_handle, &g_screen_rect );
 
@@ -166,16 +163,15 @@ void entry::impl::g_setup_rendering_state( std::function<void( )> g_function ) {
 		( float )( g_screen_rect.right - g_screen_rect.left ), ( float )( g_screen_rect.bottom - g_screen_rect.top )
 	) };
 
-	/* warp render states */
 	g_warp_render_state( g_device_handle ); /* entry::g_entry.get()-> / if you want to go in that side */
 
-	/* viewport */
+	/* setup viewport */
 	g_warp_viewport( g_device_handle, display_size );
 
-	/* run inside function */
+	/* run function */
 	g_function( );
 
-	/* release & apply stateblock */
+	/* restore dx state */
 	g_state_block->Apply( );
 	g_state_block->Release( );
 }

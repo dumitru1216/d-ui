@@ -8,20 +8,11 @@ namespace ctx {
 	class impl {
 	public:
 		void g_alloc_console( );
-		HRESULT g_create_device_window( IDirect3D9* g_p_d3d, UINT g_adapter, D3DDEVTYPE g_device_type, HWND g_h_focus_window, 
-							   DWORD g_behavior_flags, D3DPRESENT_PARAMETERS* g_presentation_parameters, IDirect3DDevice9** g_pp_device );
-
-		/* state block */
-		HRESULT g_create_state_block( LPDIRECT3DDEVICE9* g_device, D3DSTATEBLOCKTYPE g_block_tipe, IDirect3DStateBlock9* g_dx_block );
-
-		/* warper */
-		template<typename warp_memory>
-		__forceinline void g_clean_memory( warp_memory* g_destination, std::size_t g_size ) {
-			ZeroMemory( g_destination, g_size );
-		}
+		HRESULT g_create_device_window( LPDIRECT3D9* g_p_d3d, UINT g_adapter, D3DDEVTYPE g_device_type, HWND g_h_focus_window,
+							   DWORD g_behavior_flags, D3DPRESENT_PARAMETERS* g_presentation_parameters, LPDIRECT3DDEVICE9 g_pp_device );
 
 		/* warp directx */
-		void g_warp_dx( D3DPRESENT_PARAMETERS g_destination );
+		void g_warp_dx( D3DPRESENT_PARAMETERS* g_destination );
 		
 		/* warp imgui */
 		void g_warp_frame( );

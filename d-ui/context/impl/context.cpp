@@ -34,29 +34,24 @@ LPDIRECT3D9 ctx::impl::g_create_device( std::uint32_t g_sdk_version ) {
 }
 
 /* warper directx */
-void ctx::impl::g_warp_dx( D3DPRESENT_PARAMETERS g_destination ) {
-    g_destination.Windowed = TRUE;
-    g_destination.SwapEffect = D3DSWAPEFFECT_DISCARD;
-    g_destination.BackBufferFormat = D3DFMT_UNKNOWN;
-    g_destination.EnableAutoDepthStencil = TRUE;
-    g_destination.AutoDepthStencilFormat = D3DFMT_D16;
-    g_destination.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
+void ctx::impl::g_warp_dx( D3DPRESENT_PARAMETERS* g_destination ) {
+    g_destination->Windowed = TRUE;
+    g_destination->SwapEffect = D3DSWAPEFFECT_DISCARD;
+    g_destination->BackBufferFormat = D3DFMT_UNKNOWN;
+    g_destination->EnableAutoDepthStencil = TRUE;
+    g_destination->AutoDepthStencilFormat = D3DFMT_D16;
+    g_destination->PresentationInterval = D3DPRESENT_INTERVAL_ONE;
 }
 
 /* warper create device */
-HRESULT ctx::impl::g_create_device_window( IDirect3D9* g_p_d3d, UINT g_adapter, D3DDEVTYPE g_device_type, HWND g_h_focus_window,
-                       DWORD g_behavior_flags, D3DPRESENT_PARAMETERS* g_presentation_parameters, IDirect3DDevice9** g_pp_device ) {
+HRESULT ctx::impl::g_create_device_window( LPDIRECT3D9* g_p_d3d, UINT g_adapter, D3DDEVTYPE g_device_type, HWND g_h_focus_window,
+                       DWORD g_behavior_flags, D3DPRESENT_PARAMETERS* g_presentation_parameters, LPDIRECT3DDEVICE9 g_pp_device ) {
     if ( !g_p_d3d ) 
         return NULL;
 
-    return g_p_d3d->CreateDevice( g_adapter, g_device_type, g_h_focus_window, g_behavior_flags, g_presentation_parameters, g_pp_device );
+    return ( *g_p_d3d )->CreateDevice( g_adapter, g_device_type, g_h_focus_window, g_behavior_flags, g_presentation_parameters, &g_pp_device );
 }
 
-
-/* warper CreateStateBlock(this_ state_block_type, IDirect3DStateBlock9) */
-HRESULT ctx::impl::g_create_state_block( LPDIRECT3DDEVICE9* g_device, D3DSTATEBLOCKTYPE g_block_type, IDirect3DStateBlock9* g_dx_block ) {
-    return ( *g_device )->CreateStateBlock( g_block_type, &g_dx_block );
-}
 
 /* warper GetClientRect */
 BOOL ctx::impl::g_take_client_rect( HWND g_window_handle, RECT* g_screen_rect ) { /*

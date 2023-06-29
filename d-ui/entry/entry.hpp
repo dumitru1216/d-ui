@@ -5,6 +5,11 @@
 static HWND g_window_handle;
 static LPDIRECT3D9 g_d3d9_handle = NULL;
 static LPDIRECT3DDEVICE9 g_device_handle = NULL;
+
+/* defines for g_device_handle */
+#define g_init_device g_d3d9_handle->CreateDevice
+#define g_create_state_block g_device_handle->CreateStateBlock
+
 static D3DPRESENT_PARAMETERS g_d3d9_pp_handle = {};
 
 /* namespace and class */
