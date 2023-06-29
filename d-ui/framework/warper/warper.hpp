@@ -12,6 +12,10 @@ namespace warp {
 			g_font_atlas->AddFontDefault( );
 		};
 
+		static std::add_pointer_t<void( ImFontAtlas*, int )> g_initialize_freetype = [ ]( ImFontAtlas* g_font_atlas, int g_flags ) {
+			warp::g_init.get( )->g_freetype_warp( g_font_atlas, g_flags );
+		};
+
 		static std::add_pointer_t<void( ImFontAtlas*, const char*, float, const ImFontConfig*,
 										const ImWchar* )> g_create_font = [ ]( ImFontAtlas* g_font_atlas, const char* g_filename, float g_size,
 																			   const ImFontConfig* g_font_cfg, const ImWchar* g_glyph_ranges ) {
@@ -24,6 +28,9 @@ namespace warp {
 	public:
 		ImFont* g_create_font_from_ttf( ImFontAtlas* g_font_atlas, const char* g_filename, float g_size, 
 										const ImFontConfig* g_font_cfg, const ImWchar* g_glyph_ranges );
+
+		/* freetype warping */
+		void g_freetype_warp( ImFontAtlas* g_font_atlas, int g_flags );
 	};
 	inline const auto g_init = std::make_unique< impl >( );
 }
