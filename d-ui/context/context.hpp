@@ -22,6 +22,11 @@ namespace ctx {
 
 		/* warp directx */
 		void g_warp_dx( D3DPRESENT_PARAMETERS g_destination );
+		
+		/* warp imgui */
+		void g_warp_frame( );
+		void g_begin_frame( );
+		void g_end_frame( );
 
 		/* functions warper */
 		HRESULT g_reset_device( D3DPRESENT_PARAMETERS g_reset_parrameter );

@@ -47,6 +47,13 @@ int main( HINSTANCE g_instance, HINSTANCE g_prev_instance,
 			ctx::g_context.get( )->g_dispatch_message( &g_msg );
 			continue;
 		}
+
+		/* frame */
+		ImGui_ImplDX9_NewFrame( );
+		ImGui_ImplWin32_NewFrame( );
+		ImGui::NewFrame( );
+
+
 	}
 
 	/* clean again */

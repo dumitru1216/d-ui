@@ -164,3 +164,17 @@ BOOL ctx::impl::g_translate_message( const MSG* g_lp_msg ) {
 LRESULT ctx::impl::g_dispatch_message( const MSG* g_lp_msg ) {
     return DispatchMessage( g_lp_msg );
 }
+
+/* imgui warpers */
+void ctx::impl::g_warp_frame( ) {
+    ImGui_ImplDX9_NewFrame( );
+    ImGui_ImplWin32_NewFrame( );
+}
+
+void ctx::impl::g_begin_frame( ) {
+    ImGui::NewFrame( );
+}
+
+void ctx::impl::g_end_frame( ) {
+    ImGui::EndFrame( );
+}
