@@ -17,6 +17,7 @@
     <ClCompile Include="framework\panel\impl\panel.cpp" />
     <ClCompile Include="framework\objects\window\impl\window.cpp" />
     <ClCompile Include="framework\menu\impl\menu.cpp" />
+    <ClCompile Include="framework\input\impl\input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entry\entry.hpp" />
@@ -40,5 +41,6 @@
     <ClInclude Include="framework\panel\panel.hpp" />
     <ClInclude Include="framework\objects\window\window.hpp" />
     <ClInclude Include="framework\menu\menu.hpp" />
+    <ClInclude Include="framework\input\input.hpp" />
   </ItemGroup>
 </Project>

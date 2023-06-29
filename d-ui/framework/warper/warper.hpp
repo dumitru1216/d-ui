@@ -5,6 +5,10 @@
 /* pre-define drawlist */
 #define g_warp_drawlist ImGui::GetBackgroundDrawList()
 
+/* externals */
+extern bool g_input_clip_area;
+extern sdk::rect_t g_input_clip_rect;
+
 namespace warp {
 	/* main class - initialization..etc*/
 	class impl {
