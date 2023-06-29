@@ -13,6 +13,22 @@ namespace sdk {
 		float y;
 	};
 
+	struct rect_t {
+		rect_t( ) : x( 0 ), y( 0 ), w( 0 ), h( 0 ) { }
+		rect_t( int x, int y, int w, int h ) : x( x ), y( y ), w( w ), h( h ) { }
+		~rect_t( ) { }
+
+		int x, y, w, h;
+	};
+
+	struct pos_t {
+		pos_t( ) : x( 0 ), y( 0 ) { }
+		pos_t( int x, int y ) : x( x ), y( y ) { }
+		~pos_t( ) { }
+
+		int x, y;
+	};
+
 	struct col_t {
 		col_t( ) : r( 255 ), g( 255 ), b( 255 ), a( 255 ) { } /* default white */
 		col_t( int r, int g, int b, int a = 255 ) : r( r ), g( g ), b( b ), a( a ) { }

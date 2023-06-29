@@ -1,5 +1,6 @@
 #pragma once
 #include "../../includes.hpp"
+#include "../../entry/entry.hpp"
 
 /* pre-define drawlist */
 #define g_warp_drawlist ImGui::GetBackgroundDrawList()
@@ -48,5 +49,15 @@ namespace warp {
 																	const char* g_text, bool g_shadow ) {
 			warp::g_init.get( )->g_create_text( pos, color, g_id, g_text, g_shadow );
 		};	
+
+		static std::add_pointer_t<void( sdk::rect_t&, std::function<void( )> )> g_clip = 
+			[ ]( sdk::rect_t& g_area, std::function<void( )> g_function ) {
+			g_warp_drawlist->PushClipRect( ImVec2( g_area.x, g_area.y ), ImVec2( g_area.w, g_area.h ), true );
+
+			/* run the motherfucker */
+			g_function( );
+
+			g_warp_drawlist->PopClipRect( );
+		};
 	}
 }

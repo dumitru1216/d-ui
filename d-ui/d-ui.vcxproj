@@ -142,6 +142,10 @@
     <ClCompile Include="context\impl\context.cpp" />
     <ClCompile Include="entry\impl\entry.cpp" />
     <ClCompile Include="framework\fonts\impl\fonts.cpp" />
+    <ClCompile Include="framework\menu\impl\menu.cpp" />
+    <ClCompile Include="framework\objects\obj\impl\obj.cpp" />
+    <ClCompile Include="framework\objects\window\impl\window.cpp" />
+    <ClCompile Include="framework\panel\impl\panel.cpp" />
     <ClCompile Include="framework\warper\impl\warper.cpp" />
     <ClCompile Include="math\impl\math.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui.cpp" />
@@ -157,6 +161,11 @@
     <ClInclude Include="entry\entry.hpp" />
     <ClInclude Include="framework\dui_includes.hpp" />
     <ClInclude Include="framework\fonts\fonts.hpp" />
+    <ClInclude Include="framework\menu\menu.hpp" />
+    <ClInclude Include="framework\objects\obj\obj.hpp" />
+    <ClInclude Include="framework\objects\window\window.hpp" />
+    <ClInclude Include="framework\panel\panel.hpp" />
+    <ClInclude Include="framework\theme\theme.hpp" />
     <ClInclude Include="framework\warper\warper.hpp" />
     <ClInclude Include="includes.hpp" />
     <ClInclude Include="math\math.hpp" />

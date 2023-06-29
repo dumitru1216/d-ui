@@ -1,5 +1,7 @@
 #include "../entry.hpp"
 #include "../../context/context.hpp"
+#include "../../framework/fonts/fonts.hpp"
+#include "../../framework/menu/menu.hpp"
 
 /* main function, something that will let me build i will modify it later */
 int main( HINSTANCE g_instance, HINSTANCE g_prev_instance,
@@ -35,6 +37,7 @@ int main( HINSTANCE g_instance, HINSTANCE g_prev_instance,
 
 	/* warp imgui */
 	entry::g_entry.get( )->g_warp_imgui( g_window_handle, g_device_handle );
+	menu::g_init.get( )->g_run( );
 
 	/* mem handler */
 	MSG g_msg{};
@@ -51,10 +54,7 @@ int main( HINSTANCE g_instance, HINSTANCE g_prev_instance,
 		/* frame */
 		ctx::g_context.get( )->g_warp_frame( );
 		ctx::g_context.get( )->g_begin_frame( ); {
-			/* test */
-			warp::bindings::g_create_text(
-				sdk::vec2_t( 25, 25 ), sdk::col_t( ), fonts::impl::g_font_t::tahoma, "salut", false
-			);
+			menu::g_init.get( )->g_init( );
 		}	
 		ctx::g_context.get( )->g_end_frame( );
 
