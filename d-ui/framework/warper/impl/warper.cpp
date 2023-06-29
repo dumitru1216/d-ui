@@ -33,3 +33,11 @@ void warp::impl::g_create_text( sdk::vec2_t pos, sdk::col_t color, int g_id, con
 	/* font <- */
 	ImGui::PopFont( );
 }
+
+void warp::impl::g_filled_rect( sdk::vec2_t g_pos, sdk::vec2_t g_size, sdk::col_t g_color, int g_rounding ) {
+	g_warp_drawlist->AddRectFilled( ImVec2( g_pos.x, g_pos.y ), ImVec2( g_pos.x + g_size.x, g_pos.y + g_size.y ), g_color.g_convert( ), g_rounding );
+}
+
+void warp::impl::g_rect( sdk::vec2_t g_pos, sdk::vec2_t g_size, sdk::col_t g_color, int g_rounding ) {
+	g_warp_drawlist->AddRect( ImVec2( g_pos.x, g_pos.y ), ImVec2( g_pos.x + g_size.x, g_pos.y + g_size.y ), g_color.g_convert( ), g_rounding );
+}

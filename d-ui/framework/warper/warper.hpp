@@ -18,6 +18,10 @@ namespace warp {
 		void g_freetype_warp( ImFontAtlas* g_font_atlas, int g_flags );
 		void g_create_text( sdk::vec2_t pos, sdk::col_t color, int g_id, const char* g_text,
 					   bool g_shadow = false );
+
+		/* rendering warper */
+		void g_filled_rect( sdk::vec2_t g_pos, sdk::vec2_t g_size, sdk::col_t g_color, int g_rounding );
+		void g_rect( sdk::vec2_t g_pos, sdk::vec2_t g_size, sdk::col_t g_color, int g_rounding );
 	};
 	inline const auto g_init = std::make_unique< impl >( );
 
@@ -58,6 +62,16 @@ namespace warp {
 			g_function( );
 
 			g_warp_drawlist->PopClipRect( );
+		};
+
+		static std::add_pointer_t<void( sdk::vec2_t, sdk::vec2_t, sdk::col_t, int )> g_create_filled_rect = [ ]( sdk::vec2_t g_pos, sdk::vec2_t g_size, 
+																												 sdk::col_t g_color, int g_rounding ) {
+			warp::g_init.get( )->g_filled_rect( g_pos, g_size, g_color, g_rounding );
+		};
+
+		static std::add_pointer_t<void( sdk::vec2_t, sdk::vec2_t, sdk::col_t, int )> g_create_rect = [ ]( sdk::vec2_t g_pos, sdk::vec2_t g_size,
+																												 sdk::col_t g_color, int g_rounding ) {
+			warp::g_init.get( )->g_rect( g_pos, g_size, g_color, g_rounding );
 		};
 	}
 }
