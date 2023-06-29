@@ -23,6 +23,9 @@ namespace warp {
 		void g_create_text( sdk::vec2_t pos, sdk::col_t color, int g_id, const char* g_text,
 					   bool g_shadow = false );
 
+		/* get mouse pos */
+		void g_mouse_position( sdk::pos_t& position );
+
 		/* rendering warper */
 		void g_filled_rect( sdk::vec2_t g_pos, sdk::vec2_t g_size, sdk::col_t g_color, int g_rounding );
 		void g_rect( sdk::vec2_t g_pos, sdk::vec2_t g_size, sdk::col_t g_color, int g_rounding );
@@ -62,9 +65,13 @@ namespace warp {
 			[ ]( sdk::rect_t& g_area, std::function<void( )> g_function ) {
 			g_warp_drawlist->PushClipRect( ImVec2( g_area.x, g_area.y ), ImVec2( g_area.w, g_area.h ), true );
 
+			g_input_clip_area = true;
+			g_input_clip_rect = g_area;
+
 			/* run the motherfucker */
 			g_function( );
 
+			g_input_clip_area = false;
 			g_warp_drawlist->PopClipRect( );
 		};
 
@@ -76,6 +83,10 @@ namespace warp {
 		static std::add_pointer_t<void( sdk::vec2_t, sdk::vec2_t, sdk::col_t, int )> g_create_rect = [ ]( sdk::vec2_t g_pos, sdk::vec2_t g_size,
 																												 sdk::col_t g_color, int g_rounding ) {
 			warp::g_init.get( )->g_rect( g_pos, g_size, g_color, g_rounding );
+		};
+
+		static std::add_pointer_t<void( sdk::pos_t& )> g_mouse_pos = [ ]( sdk::pos_t& g_pos ) {
+			warp::g_init.get( )->g_mouse_position( g_pos );
 		};
 	}
 }

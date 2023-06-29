@@ -41,3 +41,10 @@ void warp::impl::g_filled_rect( sdk::vec2_t g_pos, sdk::vec2_t g_size, sdk::col_
 void warp::impl::g_rect( sdk::vec2_t g_pos, sdk::vec2_t g_size, sdk::col_t g_color, int g_rounding ) {
 	g_warp_drawlist->AddRect( ImVec2( g_pos.x, g_pos.y ), ImVec2( g_pos.x + g_size.x, g_pos.y + g_size.y ), g_color.g_convert( ), g_rounding );
 }
+
+void warp::impl::g_mouse_position( sdk::pos_t& position ) {
+	ImVec2 g_mouse_pos = ImGui::GetMousePos( );
+	position = sdk::pos_t(
+		static_cast< int >( g_mouse_pos.x ), static_cast< int >( g_mouse_pos.y )
+	);
+}
