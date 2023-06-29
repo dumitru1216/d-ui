@@ -8,7 +8,8 @@ namespace fonts {
 
 		/* fonts */
 		enum g_font_t {
-			default_font = 0
+			default_font = 0,
+			tahoma = 1
 		};
 
 		/* safety */

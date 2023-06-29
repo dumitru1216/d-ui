@@ -12,4 +12,23 @@ namespace sdk {
 		float x;
 		float y;
 	};
+
+	struct col_t {
+		col_t( ) : r( 255 ), g( 255 ), b( 255 ), a( 255 ) { } /* default white */
+		col_t( int r, int g, int b, int a = 255 ) : r( r ), g( g ), b( b ), a( a ) { }
+		~col_t( ) { }
+
+		std::uint32_t g_convert( ) {
+			std::uint32_t out = 0;
+
+			out = static_cast< std::uint32_t >( this->r ) << 0;
+			out |= static_cast< std::uint32_t >( this->g ) << 8;
+			out |= static_cast< std::uint32_t >( this->b ) << 16;
+			out |= static_cast< std::uint32_t >( this->a ) << 24;
+
+			return out;
+		}
+
+		int r, g, b, a;
+	};
 }
