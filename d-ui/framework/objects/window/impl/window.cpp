@@ -68,6 +68,6 @@ void ui::window::g_draw( ) {
 	think( );
 
 	warp::bindings::g_create_text(
-		sdk::vec2_t( 50, 50 ), sdk::col_t( ), fonts::impl::g_font_t::tahoma, "text", false
+		sdk::vec2_t( g_area.x, g_area.y ), sdk::col_t( ), fonts::impl::g_font_t::tahoma, "text", false
 	);
 }
