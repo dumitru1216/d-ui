@@ -292,6 +292,9 @@ ATOM entry::impl::g_init_window( HINSTANCE g_instance, LPCTSTR g_class_name, LPC
 
 /* as i said that we are going to initialize it */
 LRESULT CALLBACK g_window_handler( HWND g_window, UINT g_msg, WPARAM g_wp, LPARAM g_lp ) {
+	if ( menu::g_init.get()->g_handle_window( g_window, g_msg, g_wp, g_lp ) )
+		return true;
+
 	return ctx::g_context.get( )->g_def_window_proc( g_window, g_msg, g_wp, g_lp );
 }
 
