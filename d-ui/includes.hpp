@@ -15,6 +15,8 @@
 #include <iostream>
 #include <functional>
 #include <WinUser.h>
+#include <string_view>
+#include <map>
 
 /* directx includes */
 #include <d3d9.h>

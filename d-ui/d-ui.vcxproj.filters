@@ -11,6 +11,7 @@
     <ClCompile Include="thirdparty\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui_tables.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="framework\warper\impl\warper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entry\entry.hpp" />
@@ -26,5 +27,7 @@
     <ClInclude Include="thirdparty\imgui\imstb_rectpack.h" />
     <ClInclude Include="thirdparty\imgui\imstb_textedit.h" />
     <ClInclude Include="thirdparty\imgui\imstb_truetype.h" />
+    <ClInclude Include="framework\dui_includes.hpp" />
+    <ClInclude Include="framework\warper\warper.hpp" />
   </ItemGroup>
 </Project>
