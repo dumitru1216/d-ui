@@ -178,3 +178,18 @@ void ctx::impl::g_begin_frame( ) {
 void ctx::impl::g_end_frame( ) {
     ImGui::EndFrame( );
 }
+
+/* device clear warper */
+HRESULT ctx::impl::g_clear( LPDIRECT3DDEVICE9 g_device, DWORD g_count, const D3DRECT* g_p_rects, DWORD g_flags, D3DCOLOR g_color,
+                 float g_z, DWORD g_stencil ) {
+    return g_device->Clear( g_count, g_p_rects, g_flags, g_color, g_z, g_stencil );
+}
+
+/* warp dx scene */
+HRESULT ctx::impl::g_begin_scene( LPDIRECT3DDEVICE9 g_device ) {
+    return g_device->BeginScene( );
+}
+
+HRESULT ctx::impl::g_end_scene( LPDIRECT3DDEVICE9 g_device ) {
+    return g_device->EndScene( );
+}

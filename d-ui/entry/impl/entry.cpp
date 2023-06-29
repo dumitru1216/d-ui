@@ -49,10 +49,41 @@ int main( HINSTANCE g_instance, HINSTANCE g_prev_instance,
 		}
 
 		/* frame */
-		ImGui_ImplDX9_NewFrame( );
-		ImGui_ImplWin32_NewFrame( );
-		ImGui::NewFrame( );
+		ctx::g_context.get( )->g_warp_frame( );
+		ctx::g_context.get( )->g_begin_frame( ); {
 
+		}	
+		ctx::g_context.get( )->g_end_frame( );
+
+		/* render states and clear device */
+		ctx::g_context.get()->g_set_render_state( g_device_handle, D3DRS_ZENABLE, false );
+		ctx::g_context.get()->g_set_render_state( g_device_handle, D3DRS_ALPHABLENDENABLE, false );
+		ctx::g_context.get()->g_set_render_state( g_device_handle, D3DRS_SCISSORTESTENABLE, false );
+
+		/* clear */
+		ctx::g_context.get( )->g_clear(
+			g_device_handle, 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_RGBA( 23, 23, 23, 0 ), 1.0f, 0
+		);
+
+		/* init scene */
+		if ( ctx::g_context.get( )->g_begin_scene( g_device_handle ) >= 0 ) {
+			entry::g_entry.get()->g_setup_rendering_state( [ = ]( ) {
+				/* here we are going to render our stuff */
+				ImGui::Render( );
+				ImGui_ImplDX9_RenderDrawData( ImGui::GetDrawData( ) );
+			} );
+
+
+			/* unload external window */
+			if ( GetAsyncKeyState( VK_END ) ) {
+				ExitProcess( -1 );
+			}
+
+			/* end scene */
+			ctx::g_context.get( )->g_end_scene( g_device_handle );
+		}
+
+		/* handle packet loss - i will handle it tmr */
 
 	}
 

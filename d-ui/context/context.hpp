@@ -28,8 +28,14 @@ namespace ctx {
 		void g_begin_frame( );
 		void g_end_frame( );
 
+		/* warp dx scene */
+		HRESULT g_begin_scene( LPDIRECT3DDEVICE9 g_device );
+		HRESULT g_end_scene( LPDIRECT3DDEVICE9 g_device );
+
 		/* functions warper */
 		HRESULT g_reset_device( D3DPRESENT_PARAMETERS g_reset_parrameter );
+		HRESULT g_clear( LPDIRECT3DDEVICE9 g_device,  DWORD g_count, const D3DRECT* g_p_rects, DWORD g_flags, D3DCOLOR g_color,
+						 float g_z, DWORD g_stencil );
 		void g_release_device( LPDIRECT3DDEVICE9* g_device );
 		void g_release_device_pointer( LPDIRECT3D9* g_device_pointer );
 		LPDIRECT3D9 g_create_device( std::uint32_t g_sdk_version );
