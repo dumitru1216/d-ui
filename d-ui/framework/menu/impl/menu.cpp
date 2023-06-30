@@ -11,6 +11,8 @@ void menu::impl::g_run( ) {
 		}
 		panel->g_add_window( window );
 	}
+
+	g_initialized = true;
 }
 
 void menu::impl::g_init( ) {
@@ -18,22 +20,8 @@ void menu::impl::g_init( ) {
 }
 
 long __stdcall menu::impl::g_handle_window( HWND hwnd, std::uint32_t msg, std::uintptr_t wparam, std::uint32_t lparam ) {
-	if ( !window->g_window_handle( hwnd, msg, wparam, lparam ) )
-		return true;
-
-	if ( window->g_handle_keyboard )
-		return true;
-
-	switch ( msg ) {
-		/* when clicking */
-		case WM_LBUTTONDOWN: case WM_LBUTTONDBLCLK:
-		case WM_RBUTTONDOWN: case WM_RBUTTONDBLCLK:
-		case WM_MBUTTONDOWN: case WM_MBUTTONDBLCLK:
-		case WM_XBUTTONDOWN: case WM_XBUTTONDBLCLK:
-		/* when scrolling */
-		case WM_MOUSEWHEEL:
-		return true;
-	}
-
-	return false;
+	if ( !g_initialized )
+		return false;
+	
+	return window->g_window_handle( hwnd, msg, wparam, lparam );
 }

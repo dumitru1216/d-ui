@@ -110,21 +110,23 @@ namespace ui {
 					case WM_SYSKEYDOWN:
 						if ( wparam < 256 )
 							g_key_down[ wparam ] = true;
-					return true;
+						return true;
 					case WM_KEYUP:
 					case WM_SYSKEYUP:
 						if ( wparam < 256 )
 							g_key_down[ wparam ] = false;
-					return true;
+						return true;
 					case WM_CHAR:
 						if ( wparam > 0 && wparam < ( 1 << 16 ) && g_handle_keyboard ) {
 							g_keyboard_handler_func( wchar_t( wparam ) );
 						}
-					return true;
+						return true;
 					case WM_MOUSEWHEEL:
 					    g_scroll_delta += -( ( double )GET_WHEEL_DELTA_WPARAM( wparam ) / ( double )WHEEL_DELTA );
-					return true;
+						return true;
 				}
+				
+				return true;
 			}
 
 			/* return */

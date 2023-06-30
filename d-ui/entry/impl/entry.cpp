@@ -224,7 +224,7 @@ void entry::impl::g_warp_viewport( IDirect3DDevice9* g_device, sdk::vec2_t g_siz
 	ctx::g_context.get( )->g_set_viewport( g_device, &g_viewport );
 }
 
-long __stdcall g_window_handler( HWND g_window, UINT g_msg, WPARAM g_wp, LPARAM g_lp ); /* we are going to init this a little bit down */
+LRESULT CALLBACK g_window_handler( HWND g_window, UINT g_msg, WPARAM g_wp, LPARAM g_lp ); /* we are going to init this a little bit down */
 ATOM entry::impl::g_register_window( HINSTANCE g_instance, LPCTSTR g_name ) {
 	/*
 		registers a window class by initializing a wndclassex structure with the following properties:
@@ -291,12 +291,28 @@ ATOM entry::impl::g_init_window( HINSTANCE g_instance, LPCTSTR g_class_name, LPC
 }
 
 /* as i said that we are going to initialize it */
-WNDPROC o_wndproc = 0;
-long __stdcall g_window_handler( HWND g_window, UINT g_msg, WPARAM g_wp, LPARAM g_lp ) {
+LRESULT CALLBACK g_window_handler( HWND g_window, UINT g_msg, WPARAM g_wp, LPARAM g_lp ) {
 	if ( menu::g_init->g_handle_window( g_window, g_msg, g_wp, g_lp ) ) // crash
 		return true;
 
-	return CallWindowProcA( o_wndproc, g_window, g_msg, g_wp, g_lp );
+	switch ( g_msg ) {
+		case WM_SIZE:
+		if ( g_device_handle != NULL && g_wp != SIZE_MINIMIZED ) {
+			g_d3d9_pp_handle.BackBufferWidth = LOWORD( g_lp );
+			g_d3d9_pp_handle.BackBufferHeight = HIWORD( g_lp );
+			entry::g_entry.get()->g_reset_device( );
+		}
+		return 0;
+		case WM_SYSCOMMAND:
+		if ( ( g_wp & 0xfff0 ) == SC_KEYMENU ) /* Disable ALT application menu */
+			return 0;
+		break;
+		case WM_DESTROY:
+		PostQuitMessage( 0 );
+		return 0;
+	}
+
+	return DefWindowProcA( g_window, g_msg, g_wp, g_lp );
 }
 
 void entry::impl::g_warp_imgui( HWND g_handle_window, IDirect3DDevice9* g_device ) {
