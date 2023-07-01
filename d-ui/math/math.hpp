@@ -67,6 +67,6 @@ namespace sdk {
 
 	class divide_t {
 	public:
-		std::vector< int > g_collums_per_row;
+		std::vector< int > g_columns_per_row;
 	};
 }
