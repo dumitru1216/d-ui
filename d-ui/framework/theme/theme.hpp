@@ -6,6 +6,7 @@ namespace theme {
 	public:
 		struct g_mapper {
 			int spacing = 15;
+			double g_anim_speed = 0.25;
 
 			sdk::col_t g_backround = sdk::col_t( 14, 12, 29 );
 		};

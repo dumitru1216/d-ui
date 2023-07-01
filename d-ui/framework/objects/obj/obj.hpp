@@ -32,6 +32,11 @@ namespace ui {
 
 		/* other down */
 		double g_time = 0.0;
+		double g_start_hover_time = 0.0;
+		double g_start_click_time = 0.0;
+		double g_fade_timer = 0.0;
+		double g_fading_animation_timer = 0.0;
+		double g_end_hover_time = 0.0;
 
 		/* find parent window */
 		template < typename type >
