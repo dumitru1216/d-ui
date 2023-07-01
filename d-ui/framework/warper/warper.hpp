@@ -23,6 +23,9 @@ namespace warp {
 		void g_create_text( sdk::vec2_t pos, sdk::col_t color, int g_id, const char* g_text,
 					   bool g_shadow = false );
 
+		/* text size */
+		ImVec2 g_text_size( const char* text );
+
 		/* get mouse pos */
 		void g_mouse_position( sdk::pos_t& position );
 

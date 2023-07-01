@@ -3,6 +3,9 @@
 #include "../obj/obj.hpp"
 #include <array>
 
+/* disable warning */
+#pragma warning ( disable : 4018 )
+
 namespace ui {
 	class tab : public obj {
 	private:

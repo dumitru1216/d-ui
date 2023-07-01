@@ -48,3 +48,7 @@ void warp::impl::g_mouse_position( sdk::pos_t& position ) {
 		static_cast< int >( g_mouse_pos.x ), static_cast< int >( g_mouse_pos.y )
 	);
 }
+
+ImVec2 warp::impl::g_text_size( const char* text ) {
+	return ImGui::GetFont( )->CalcTextSizeA( ImGui::GetFontSize( ), FLT_MAX, -1.0f, text );
+}

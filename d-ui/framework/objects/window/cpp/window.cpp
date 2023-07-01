@@ -3,6 +3,7 @@
 #include "../../../fonts/fonts.hpp"
 #include "../../../input/input.hpp"
 #include "../../../theme/theme.hpp"
+#include "../../tab/tab.hpp"
 
 void ui::window::think( ) {
 	/*
@@ -73,7 +74,7 @@ void ui::window::g_draw( ) {
 
 	/* backround */
 	warp::bindings::g_create_filled_rect(
-		g_area, theme::g_init.get()->g_map.g_backround, 3
+		g_area, theme::g_init.get( )->g_map.g_backround, 3
 	);
 
 	/* outline simple */
@@ -87,17 +88,12 @@ void ui::window::g_draw( ) {
 
 	/* run it */
 	g_outline_anim = g_fade_timer > g_highlight ? 200 : int( g_fade_timer * ( 1.0 / g_highlight ) * g_outline_anim );
-	
+
 	/* clamp */
 	if ( g_outline_anim > 200 )
 		g_outline_anim = 200;
 
 	if ( g_outline_anim > 0 ) {
-		// warp::bindings::g_create_rect(
-		// 	sdk::rect_t( g_area.x - 1, ( ( g_area.y + g_area.h / 2 - 1 ) - ( g_outline_anim / 2 ) ),
-		// 	             g_area.w + 2, g_outline_anim + 2 ), theme::g_init.get( )->g_map.g_accent.g_modify_alpha( 120 ), 3
-		// );
-
 		warp::bindings::g_create_rect(
 			sdk::rect_t( g_area.x - 1, g_area.y - 1, g_area.w + 2, g_area.h + 2 ), theme::g_init.get( )->g_map.g_accent.g_modify_alpha( g_outline_anim ), 3
 		);
@@ -123,6 +119,16 @@ void ui::window::g_draw( ) {
 			sdk::rect_t( g_area.x + ( g_area.w / 2 ) - ( g_bar_anim / 2 ), g_area.y + 45, g_bar_anim, 1 ), theme::g_init.get( )->g_map.g_accent.g_modify_alpha( 120 ), 3
 		);
 	}
+
+	/* tab system */
+	std::vector< std::pair< std::shared_ptr< tab >, int > > g_tab_list;
+	auto g_total_tabs_w = 0;
+
+	std::for_each( g_objects.begin( ), g_objects.end( ), [ & ]( std::shared_ptr< obj > g_object ) {
+		if ( g_object->g_type == g_object_tab ) {
+			auto g_tab = std::static_pointer_cast< tab >( g_object );
+		}
+	} );
 
 	handling::input_sdk::g_click_switch = false;
 	g_scroll_delta = 0.0;

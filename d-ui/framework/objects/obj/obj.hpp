@@ -29,6 +29,7 @@ namespace ui {
 
 		/* object type */
 		g_object_type g_type;
+		std::vector< std::shared_ptr< obj > > g_objects;
 
 		/* other down */
 		double g_time = 0.0;
