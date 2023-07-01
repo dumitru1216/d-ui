@@ -76,6 +76,11 @@ void ui::window::g_draw( ) {
 	/* handle input */
 	think( );
 
+	/* update cursor pos */
+	g_cursor_pos = sdk::pos_t(
+		g_area.x + theme::g_init.get()->g_map.spacing, g_area.y + theme::g_init.get( )->g_map.spacing
+	);
+
 	/* backround */
 	warp::bindings::g_create_filled_rect(
 		g_area, theme::g_init.get( )->g_map.g_backround, 3
