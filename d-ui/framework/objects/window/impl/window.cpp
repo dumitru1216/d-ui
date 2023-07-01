@@ -59,6 +59,9 @@ void ui::window::think( ) {
 
 	if ( g_area.y + g_area.h - 26 > g_screen_rect.h )
 		g_area.y = g_screen_rect.h - g_area.h + 26;
+
+	/* animate */
+	g_animate( g_area );
 }
 
 void ui::window::g_draw( ) {
@@ -73,6 +76,27 @@ void ui::window::g_draw( ) {
 		g_area, theme::g_init.get()->g_map.g_backround, 3
 	);
 
+	/* outline simple */
+	warp::bindings::g_create_rect(
+		sdk::rect_t( g_area.x - 1, g_area.y - 1, g_area.w + 2, g_area.h + 2 ), sdk::col_t( 0, 0, 0 ), 3
+	);
+
+	/* outline anim */
+	auto g_highlight = theme::g_init.get( )->g_map.g_anim_speed;
+	int g_outline_anim{ 1000 };
+
+	/* run it */
+	g_outline_anim = g_fade_timer > g_highlight ? 1000 : int( g_fade_timer * ( 1.0 / g_highlight ) * g_outline_anim );
 	
+	/* clamp */
+	if ( g_outline_anim > g_area.h )
+		g_outline_anim = g_area.h;
+
+	if ( g_outline_anim > 0 ) {
+		warp::bindings::g_create_rect(
+			sdk::rect_t( g_area.x - 1, ( ( g_area.y + g_area.h / 2 - 1 ) - ( g_outline_anim / 2 ) ),
+			             g_area.w + 2, g_outline_anim + 2 ), theme::g_init.get( )->g_map.g_accent.g_modify_alpha( 80 ), 3
+		);
+	}
 
 }

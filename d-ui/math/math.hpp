@@ -45,6 +45,23 @@ namespace sdk {
 			return out;
 		}
 
+		col_t g_modify_alpha( int a ) {
+			return col_t( r, g, b, a );
+		}
+
+		col_t g_darker( int amount ) {
+			int red = r;
+			int green = g;
+			int blue = b;
+
+			// reduce the RGB values by the given amount
+			red = std::fmax( 0, red - amount );
+			green = std::fmax( 0, green - amount );
+			blue = std::fmax( 0, blue - amount );
+
+			return col_t( red, green, blue, a );
+		}
+
 		int r, g, b, a;
 	};
 }
