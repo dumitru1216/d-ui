@@ -195,6 +195,11 @@ void ui::window::g_draw( ) {
 		} );
 	} );
 
+	/* overlay */
+	if ( gg_render_overlay ) {
+		g_overlay_func( );
+	}
+
 	handling::input_sdk::g_click_switch = false;
 	g_scroll_delta = 0.0;
 }

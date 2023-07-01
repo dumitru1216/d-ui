@@ -9,6 +9,9 @@ namespace ui {
 	private:
 		std::string g_title;
 		sdk::pos_t g_click_offset = sdk::pos_t( );
+
+		std::function< void( ) > g_overlay_func;
+		bool gg_render_overlay = true;
 	public:
 		sdk::pos_t g_cursor_pos;
 
@@ -49,6 +52,12 @@ namespace ui {
 
 		void g_add_tab( const std::shared_ptr< tab >& g_new_tab ) {
 			g_add_element( g_new_tab );
+		}
+
+		/* draw overlays */
+		void g_render_overlay( const std::function< void( ) >& overlay_renderer ) {
+			g_overlay_func = overlay_renderer;
+			gg_render_overlay = true;
 		}
 
 		/* window handler */
