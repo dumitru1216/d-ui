@@ -2,6 +2,7 @@
 #include "../../../warper/warper.hpp"
 #include "../../../fonts/fonts.hpp"
 #include "../../../input/input.hpp"
+#include "../../../theme/theme.hpp"
 
 void ui::window::think( ) {
 	/*
@@ -67,7 +68,8 @@ void ui::window::g_draw( ) {
 	/* handle input */
 	think( );
 
-	warp::bindings::g_create_text(
-		sdk::vec2_t( g_area.x, g_area.y ), sdk::col_t( ), fonts::impl::g_font_t::tahoma, "text", false
+	/* backround */
+	warp::bindings::g_create_filled_rect(
+		g_area, theme::g_init.get()->g_map.g_backround, 3
 	);
 }

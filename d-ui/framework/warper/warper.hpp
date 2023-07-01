@@ -75,14 +75,14 @@ namespace warp {
 			g_warp_drawlist->PopClipRect( );
 		};
 
-		static std::add_pointer_t<void( sdk::vec2_t, sdk::vec2_t, sdk::col_t, int )> g_create_filled_rect = [ ]( sdk::vec2_t g_pos, sdk::vec2_t g_size, 
+		static std::add_pointer_t<void( sdk::rect_t, sdk::col_t, int )> g_create_filled_rect = [ ]( sdk::rect_t g_rect,
 																												 sdk::col_t g_color, int g_rounding ) {
-			warp::g_init.get( )->g_filled_rect( g_pos, g_size, g_color, g_rounding );
+			warp::g_init.get( )->g_filled_rect( sdk::vec2_t(g_rect.x, g_rect.y), sdk::vec2_t(g_rect.w, g_rect.h), g_color, g_rounding );
 		};
 
-		static std::add_pointer_t<void( sdk::vec2_t, sdk::vec2_t, sdk::col_t, int )> g_create_rect = [ ]( sdk::vec2_t g_pos, sdk::vec2_t g_size,
-																												 sdk::col_t g_color, int g_rounding ) {
-			warp::g_init.get( )->g_rect( g_pos, g_size, g_color, g_rounding );
+		static std::add_pointer_t<void( sdk::rect_t, sdk::col_t, int )> g_create_rect = [ ]( sdk::rect_t g_rect,
+																									sdk::col_t g_color, int g_rounding ) {
+			warp::g_init.get( )->g_rect( sdk::vec2_t( g_rect.x, g_rect.y ), sdk::vec2_t( g_rect.w, g_rect.h ), g_color, g_rounding );
 		};
 
 		static std::add_pointer_t<void( sdk::pos_t& )> g_mouse_pos = [ ]( sdk::pos_t& g_pos ) {

@@ -6,7 +6,7 @@ std::shared_ptr< ui::window > window;
 
 void menu::impl::g_run( ) {
 	panel = std::make_shared< ui::panel >( ); {
-		window = std::make_shared< ui::window >( sdk::rect_t( 200, 200, 200, 200 ), "salut" ); {
+		window = std::make_shared< ui::window >( sdk::rect_t( 200, 200, 550, 430 ), "salut" ); {
 
 		}
 		panel->g_add_window( window );
