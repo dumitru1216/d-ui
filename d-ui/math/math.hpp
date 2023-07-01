@@ -64,4 +64,9 @@ namespace sdk {
 
 		int r, g, b, a;
 	};
+
+	class divide_t {
+	public:
+		std::vector< int > g_collums_per_row;
+	};
 }
