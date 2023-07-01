@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="entry\impl\entry.cpp" />
-    <ClCompile Include="context\impl\context.cpp" />
-    <ClCompile Include="math\impl\math.cpp" />
+    <ClCompile Include="entry\cpp\entry.cpp" />
+    <ClCompile Include="context\cpp\context.cpp" />
+    <ClCompile Include="math\cpp\math.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui_draw.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui_freetype.cpp" />
@@ -11,13 +11,14 @@
     <ClCompile Include="thirdparty\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui_tables.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="framework\warper\impl\warper.cpp" />
-    <ClCompile Include="framework\fonts\impl\fonts.cpp" />
-    <ClCompile Include="framework\objects\obj\impl\obj.cpp" />
-    <ClCompile Include="framework\panel\impl\panel.cpp" />
-    <ClCompile Include="framework\objects\window\impl\window.cpp" />
-    <ClCompile Include="framework\menu\impl\menu.cpp" />
-    <ClCompile Include="framework\input\impl\input.cpp" />
+    <ClCompile Include="framework\warper\cpp\warper.cpp" />
+    <ClCompile Include="framework\fonts\cpp\fonts.cpp" />
+    <ClCompile Include="framework\objects\obj\cpp\obj.cpp" />
+    <ClCompile Include="framework\panel\cpp\panel.cpp" />
+    <ClCompile Include="framework\objects\window\cpp\window.cpp" />
+    <ClCompile Include="framework\menu\cpp\menu.cpp" />
+    <ClCompile Include="framework\input\cpp\input.cpp" />
+    <ClCompile Include="framework\objects\tab\cpp\tab.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entry\entry.hpp" />
@@ -42,5 +43,6 @@
     <ClInclude Include="framework\objects\window\window.hpp" />
     <ClInclude Include="framework\menu\menu.hpp" />
     <ClInclude Include="framework\input\input.hpp" />
+    <ClInclude Include="framework\objects\tab\tab.hpp" />
   </ItemGroup>
 </Project>
