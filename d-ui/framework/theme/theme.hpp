@@ -9,6 +9,7 @@ namespace theme {
 			double g_anim_speed = 0.25;
 
 			sdk::col_t g_backround = sdk::col_t( 14, 12, 29 );
+			sdk::col_t g_top_bar = sdk::col_t( 22, 18, 43 );
 			sdk::col_t g_accent = sdk::col_t( 103, 104, 255 );
 		};
 		g_mapper g_map;

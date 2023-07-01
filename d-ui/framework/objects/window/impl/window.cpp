@@ -83,20 +83,47 @@ void ui::window::g_draw( ) {
 
 	/* outline anim */
 	auto g_highlight = theme::g_init.get( )->g_map.g_anim_speed;
-	int g_outline_anim{ 1000 };
+	int g_outline_anim{ 200 };
 
 	/* run it */
-	g_outline_anim = g_fade_timer > g_highlight ? 1000 : int( g_fade_timer * ( 1.0 / g_highlight ) * g_outline_anim );
+	g_outline_anim = g_fade_timer > g_highlight ? 200 : int( g_fade_timer * ( 1.0 / g_highlight ) * g_outline_anim );
 	
 	/* clamp */
-	if ( g_outline_anim > g_area.h )
-		g_outline_anim = g_area.h;
+	if ( g_outline_anim > 200 )
+		g_outline_anim = 200;
 
 	if ( g_outline_anim > 0 ) {
+		// warp::bindings::g_create_rect(
+		// 	sdk::rect_t( g_area.x - 1, ( ( g_area.y + g_area.h / 2 - 1 ) - ( g_outline_anim / 2 ) ),
+		// 	             g_area.w + 2, g_outline_anim + 2 ), theme::g_init.get( )->g_map.g_accent.g_modify_alpha( 120 ), 3
+		// );
+
 		warp::bindings::g_create_rect(
-			sdk::rect_t( g_area.x - 1, ( ( g_area.y + g_area.h / 2 - 1 ) - ( g_outline_anim / 2 ) ),
-			             g_area.w + 2, g_outline_anim + 2 ), theme::g_init.get( )->g_map.g_accent.g_modify_alpha( 80 ), 3
+			sdk::rect_t( g_area.x - 1, g_area.y - 1, g_area.w + 2, g_area.h + 2 ), theme::g_init.get( )->g_map.g_accent.g_modify_alpha( g_outline_anim ), 3
 		);
 	}
 
+	/* top bar */
+	warp::bindings::g_create_filled_rect(
+		sdk::rect_t( g_area.x, g_area.y, g_area.w, 45 ), theme::g_init.get( )->g_map.g_top_bar, 3
+	);
+
+	/* top bar line */
+	int g_bar_anim{ 1200 };
+
+	/* run it */
+	g_bar_anim = g_fade_timer > g_highlight ? 1200 : int( g_fade_timer * ( 1.0 / g_highlight ) * g_bar_anim );
+
+	/* clamp */
+	if ( g_bar_anim > g_area.w )
+		g_bar_anim = g_area.w;
+
+	if ( g_bar_anim > 0 ) {
+		warp::bindings::g_create_filled_rect(
+			sdk::rect_t( g_area.x + ( g_area.w / 2 ) - ( g_bar_anim / 2 ), g_area.y + 45, g_bar_anim, 1 ), theme::g_init.get( )->g_map.g_accent.g_modify_alpha( 120 ), 3
+		);
+	}
+
+	handling::input_sdk::g_click_switch = false;
+	g_scroll_delta = 0.0;
 }
