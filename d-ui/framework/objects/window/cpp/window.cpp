@@ -3,7 +3,6 @@
 #include "../../../fonts/fonts.hpp"
 #include "../../../input/input.hpp"
 #include "../../../theme/theme.hpp"
-#include "../../tab/tab.hpp"
 #include "../../../panel/panel.hpp"
 
 void ui::window::think( ) {
@@ -118,6 +117,10 @@ void ui::window::g_draw( ) {
 	if ( g_bar_anim > g_area.w )
 		g_bar_anim = g_area.w;
 
+	warp::bindings::g_create_filled_rect(
+		sdk::rect_t( g_area.x, g_area.y + 45, g_area.w, 1 ), sdk::col_t( 0, 0, 0 ).g_modify_alpha( 255 ), 3
+	);
+
 	if ( g_bar_anim > 0 ) {
 		warp::bindings::g_create_filled_rect(
 			sdk::rect_t( g_area.x + ( g_area.w / 2 ) - ( g_bar_anim / 2 ), g_area.y + 45, g_bar_anim, 1 ), theme::g_init.get( )->g_map.g_accent.g_modify_alpha( 120 ), 3
@@ -133,14 +136,14 @@ void ui::window::g_draw( ) {
 			auto g_tab = std::static_pointer_cast< tab >( g_object );
 
 			sdk::rect_t g_bounds{};
-			warp::bindings::g_text_bounding( g_tab->g_title, g_bounds, fonts::impl::g_font_t::tahoma ); /* calculate the bounding box of the tab's title text */
-			g_total_tabs_w += g_bounds.w + 4; /* increment the total width of tabs by the tab's title width plus 4 */
+			warp::bindings::g_text_bounding( g_tab->g_title, g_bounds, fonts::impl::g_font_t::roboto ); /* calculate the bounding box of the tab's title text */
+			g_total_tabs_w += g_bounds.w + 4 + /* spacing */ + 10; /* increment the total width of tabs by the tab's title width plus 4 */
 
-			g_tab_list.push_back( std::pair<std::shared_ptr<tab>, int>( g_tab, g_bounds.w ) ); /* add the tab and its title width to the tab list */
+			g_tab_list.push_back( std::pair<std::shared_ptr<tab>, int>( g_tab, g_bounds.w + 10 ) ); /* add the tab and its title width to the tab list */
 		}
 	} );
 
-	auto g_last_tab_pos = sdk::vec2_t( g_area.x + g_area.w - g_total_tabs_w - 6, g_area.y - 28 + 6 );
+	auto g_last_tab_pos = sdk::vec2_t( g_area.x + ( g_area.w / 2 ) - ( g_total_tabs_w / 2 ) + 6, g_area.y + 15 );
 	std::for_each( g_tab_list.begin( ), g_tab_list.end( ), [ & ]( std::pair< std::shared_ptr< tab >, int > object ) {
 		if ( handling::g_init.get()->g_clicking( sdk::rect_t( g_last_tab_pos.x, g_last_tab_pos.y, object.second, 16 ) ) ) {
 			/* update click timer */
@@ -157,6 +160,30 @@ void ui::window::g_draw( ) {
 
 			/* select clicked tab */
 			object.first->g_selected = true;
+		}
+
+		/* animation */
+		auto g_time_since_click = std::clamp( g_parent_panel.g_time - object.first->g_time, 0.0, theme::g_init.get( )->g_map.g_anim_speed );
+		auto g_bar_width = object.second - object.second * ( g_time_since_click * ( 1.0 / theme::g_init.get( )->g_map.g_anim_speed ) );
+		auto g_text_height = 0;
+		auto g_alpha = 255 - int( g_time_since_click * ( 1.0 / theme::g_init.get( )->g_map.g_anim_speed ) * 80.0 );
+
+		if ( object.first->g_selected ) {
+			g_alpha = 175 + int( g_time_since_click * ( 1.0 / theme::g_init.get( )->g_map.g_anim_speed ) * 80.0 );
+			g_bar_width = object.second * ( g_time_since_click * ( 1.0 / theme::g_init.get( )->g_map.g_anim_speed ) );
+			g_text_height = 2 * ( g_time_since_click * ( 1.0 / theme::g_init.get( )->g_map.g_anim_speed ) );
+		}
+
+		/* render names */
+		warp::bindings::g_create_text(
+			sdk::vec2_t( g_last_tab_pos.x, g_area.y + 15 ), object.first->g_selected ? sdk::col_t( ).g_modify_alpha( 200 ) : sdk::col_t( ).g_modify_alpha( 100 ),
+			fonts::impl::g_font_t::roboto, object.first->g_title.c_str( ), false
+		);
+
+		if ( object.first->g_selected ) {
+			warp::bindings::g_create_filled_rect(
+				sdk::rect_t( g_last_tab_pos.x + ( object.second / 2 ) - ( g_bar_width / 2 ) - 3, g_area.y + 43, g_bar_width, 2 ), theme::g_init.get( )->g_map.g_accent, 2
+			);
 		}
 
 		g_last_tab_pos.x += object.second + 4;

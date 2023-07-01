@@ -5,3 +5,4 @@
 #include "objects/window/window.hpp"
 #include "theme/theme.hpp"
 #include "panel/panel.hpp"
+#include "objects/tab/tab.hpp"

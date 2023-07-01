@@ -7,7 +7,30 @@ std::shared_ptr< ui::window > window;
 void menu::impl::g_run( ) {
 	panel = std::make_shared< ui::panel >( ); {
 		window = std::make_shared< ui::window >( sdk::rect_t( 200, 200, 550, 430 ), "d-ui framework" ); {
+			auto ragebot = std::make_shared< ui::tab >( "aim" );
+			{
+				
+			} window->g_add_tab( ragebot );
 
+			auto antiaim = std::make_shared< ui::tab >( "anti-aim" );
+			{
+
+			} window->g_add_tab( antiaim );
+
+			auto world = std::make_shared< ui::tab >( "world" );
+			{
+
+			} window->g_add_tab( world );
+
+			auto player = std::make_shared< ui::tab >( "player" );
+			{
+
+			} window->g_add_tab( player );
+
+			auto misc = std::make_shared< ui::tab >( "misc" );
+			{
+
+			} window->g_add_tab( misc );
 		}
 		panel->g_add_window( window );
 	}

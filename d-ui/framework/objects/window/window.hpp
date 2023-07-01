@@ -2,6 +2,7 @@
 #include "../../../includes.hpp"
 #include "../obj/obj.hpp"
 #include <array>
+#include "../tab/tab.hpp"
 
 namespace ui {
 	class window : public obj {
@@ -39,6 +40,16 @@ namespace ui {
 
 		/* mouse think */
 		void think( );
+
+		/* tab stuff */
+		void g_add_element( const std::shared_ptr< obj >& g_new_obj ) {
+			g_new_obj->g_parent = this;
+			g_objects.push_back( g_new_obj );
+		}
+
+		void g_add_tab( const std::shared_ptr< tab >& g_new_tab ) {
+			g_add_element( g_new_tab );
+		}
 
 		/* window handler */
 		long __stdcall g_window_handle( HWND hwnd, std::uint32_t msg, 
