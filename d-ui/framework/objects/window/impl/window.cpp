@@ -72,4 +72,7 @@ void ui::window::g_draw( ) {
 	warp::bindings::g_create_filled_rect(
 		g_area, theme::g_init.get()->g_map.g_backround, 3
 	);
+
+	
+
 }

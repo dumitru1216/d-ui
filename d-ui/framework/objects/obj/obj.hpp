@@ -31,6 +31,7 @@ namespace ui {
 		g_object_type g_type;
 
 		/* other down */
+		double g_time = 0.0;
 
 		/* find parent window */
 		template < typename type >

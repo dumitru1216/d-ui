@@ -20,6 +20,6 @@ namespace ui {
 
 		/* overriders */
 		void g_draw( ) override { };
-		void g_render( );
+		void g_render( double g_t );
 	};
 }
