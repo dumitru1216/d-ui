@@ -68,6 +68,7 @@ void ui::window::think( ) {
 void ui::window::g_draw( ) {
 	/* we have not finished input frame */
 	handling::input_sdk::g_finished_input_frame = false;
+	gg_render_overlay = false;
 
 	/* parent panel */
 	auto& g_parent_panel = g_find_parent< panel >( g_object_panel );
