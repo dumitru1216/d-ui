@@ -49,6 +49,9 @@ void warp::impl::g_mouse_position( sdk::pos_t& position ) {
 	);
 }
 
-ImVec2 warp::impl::g_text_size( const char* text ) {
+ImVec2 warp::impl::g_text_size( const char* text, int g_id ) {
+	ImGuiIO& io = ImGui::GetIO( );
+	ImGui::PushFont( io.Fonts->Fonts[ g_id ] );
 	return ImGui::GetFont( )->CalcTextSizeA( ImGui::GetFontSize( ), FLT_MAX, -1.0f, text );
+	ImGui::PopFont( );
 }

@@ -24,7 +24,7 @@ namespace warp {
 					   bool g_shadow = false );
 
 		/* text size */
-		ImVec2 g_text_size( const char* text );
+		ImVec2 g_text_size( const char* g_text, int g_id );
 
 		/* get mouse pos */
 		void g_mouse_position( sdk::pos_t& position );
@@ -90,6 +90,13 @@ namespace warp {
 
 		static std::add_pointer_t<void( sdk::pos_t& )> g_mouse_pos = [ ]( sdk::pos_t& g_pos ) {
 			warp::g_init.get( )->g_mouse_position( g_pos );
+		};
+
+		static std::add_pointer_t<void( std::string&, sdk::rect_t&, int )> g_text_bounding = [ ]( std::string& g_title, sdk::rect_t& g_bounds, int font ) {
+			ImVec2 size = warp::g_init.get( )->g_text_size( g_title.c_str( ), font );
+
+			g_bounds.w = size.x;
+			g_bounds.h = size.y;
 		};
 	}
 }

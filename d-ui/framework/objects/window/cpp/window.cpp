@@ -124,11 +124,18 @@ void ui::window::g_draw( ) {
 	std::vector< std::pair< std::shared_ptr< tab >, int > > g_tab_list;
 	auto g_total_tabs_w = 0;
 
-	std::for_each( g_objects.begin( ), g_objects.end( ), [ & ]( std::shared_ptr< obj > g_object ) {
+	std::for_each( g_objects.begin( ), g_objects.end( ), [ & ]( std::shared_ptr<obj> g_object ) {
 		if ( g_object->g_type == g_object_tab ) {
 			auto g_tab = std::static_pointer_cast< tab >( g_object );
+
+			sdk::rect_t g_bounds{};
+			warp::bindings::g_text_bounding( g_tab->g_title, g_bounds, fonts::impl::g_font_t::tahoma ); /* calculate the bounding box of the tab's title text */
+			g_total_tabs_w += g_bounds.w + 4; /* increment the total width of tabs by the tab's title width plus 4 */
+
+			g_tab_list.push_back( std::pair<std::shared_ptr<tab>, int>( g_tab, g_bounds.w ) ); /* add the tab and its title width to the tab list */
 		}
 	} );
+
 
 	handling::input_sdk::g_click_switch = false;
 	g_scroll_delta = 0.0;
