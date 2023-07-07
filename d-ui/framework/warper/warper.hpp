@@ -64,8 +64,8 @@ namespace warp {
 			warp::g_init.get( )->g_create_text( pos, color, g_id, g_text, g_shadow );
 		};	
 
-		static std::add_pointer_t<void( sdk::rect_t&, std::function<void( )> )> g_clip = 
-			[ ]( sdk::rect_t& g_area, std::function<void( )> g_function ) {
+		static std::add_pointer_t<void( sdk::rect_t, std::function<void( )> )> g_clip = 
+			[ ]( sdk::rect_t g_area, std::function<void( )> g_function ) {
 			g_warp_drawlist->PushClipRect( ImVec2( g_area.x, g_area.y ), ImVec2( g_area.w, g_area.h ), true );
 
 			g_input_clip_area = true;
