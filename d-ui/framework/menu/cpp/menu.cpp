@@ -9,7 +9,12 @@ void menu::impl::g_run( ) {
 		window = std::make_shared< ui::window >( sdk::rect_t( 200, 200, 550, 430 ), "d-ui framework" ); {
 			auto ragebot = std::make_shared< ui::tab >( "aim" );
 			{
-				
+				auto main_grp = std::make_shared< ui::group >( "main" );
+				{
+					ragebot->g_handle_group( main_grp );
+				};
+
+				ragebot->g_add_columns( 2 );
 			} window->g_add_tab( ragebot );
 
 			auto antiaim = std::make_shared< ui::tab >( "anti-aim" );

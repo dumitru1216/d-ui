@@ -1,5 +1,6 @@
 #pragma once
 #include "../../../includes.hpp"
+#include "../../theme/theme.hpp"
 
 namespace ui {
 	enum g_object_type {

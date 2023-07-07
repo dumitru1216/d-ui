@@ -19,7 +19,7 @@ namespace ui {
 		}
 		~group( ) { }
 
-		void g_handle_element( const std::shared_ptr< obj >& g_new_obj ) {
+		void g_handle_obj( const std::shared_ptr< obj >& g_new_obj ) {
 			g_new_obj->g_parent = this;
 			g_objects.push_back( g_new_obj );
 		}

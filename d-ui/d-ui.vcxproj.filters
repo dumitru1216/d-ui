@@ -19,6 +19,7 @@
     <ClCompile Include="framework\menu\cpp\menu.cpp" />
     <ClCompile Include="framework\input\cpp\input.cpp" />
     <ClCompile Include="framework\objects\tab\cpp\tab.cpp" />
+    <ClCompile Include="framework\objects\group\cpp\group.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entry\entry.hpp" />
@@ -44,5 +45,6 @@
     <ClInclude Include="framework\menu\menu.hpp" />
     <ClInclude Include="framework\input\input.hpp" />
     <ClInclude Include="framework\objects\tab\tab.hpp" />
+    <ClInclude Include="framework\objects\group\group.hpp" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #pragma once
 #include "../../../includes.hpp"
 #include "../obj/obj.hpp"
+#include "../group/group.hpp"
 #include <array>
 
 /* disable warning */
@@ -31,6 +32,9 @@ namespace ui {
 		}
 
 		/* function handle group - to do */
+		void g_handle_group( const std::shared_ptr< group >& new_group ) {
+			g_handle_obj( new_group );
+		}
 
 		/* override draw */
 		void g_draw( ) override;

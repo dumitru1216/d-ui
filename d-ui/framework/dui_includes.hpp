@@ -6,3 +6,4 @@
 #include "theme/theme.hpp"
 #include "panel/panel.hpp"
 #include "objects/tab/tab.hpp"
+#include "objects/group/group.hpp"

@@ -41,6 +41,11 @@ void ui::group::g_draw( ) {
 	auto& cursor_pos = g_parent_window.g_cursor_pos;
 	const auto og_cursor_pos = cursor_pos;
 
+	/* drawing */
+	warp::bindings::g_create_filled_rect(
+		sdk::rect_t( og_cursor_pos.x, og_cursor_pos.y, g_area.w, g_area.h ), sdk::col_t( 30, 30, 30 ), 0
+	);
+
 	/* move all objects inside group */
 	cursor_pos.x += theme::g_init.get( )->g_map.spacing;
 	cursor_pos.y += theme::g_init.get( )->g_map.spacing * 2;
