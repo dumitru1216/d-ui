@@ -64,6 +64,25 @@ namespace ui {
 			return false;
 		}
 
+		/* calculate element height */
+		int g_calculate_height( ) {
+			switch ( g_type ) {
+				case g_object_slider:
+				  return theme::g_init.get( )->g_map.spacing + theme::g_init.get( )->g_map.spacing / 2;
+				case g_object_textbox:
+				  return theme::g_init.get( )->g_map.spacing * 2 + theme::g_init.get( )->g_map.spacing / 2;
+				case g_object_dropdown:
+				case g_object_colorpicker:
+				case g_object_keybind:
+				case g_object_label:
+				case g_object_button:
+				case g_object_checkbox:
+				  return g_area.h;
+			}
+
+			return 0;
+		}
+
 		/* void & virtual */
 		virtual void g_draw( ) = 0;
 		void g_draw_ex_parent( );
