@@ -24,7 +24,7 @@ namespace ui {
 			g_objects.push_back( g_new_obj );
 		}
 
-		void think( );
+		void g_think( );
 
 		/* override draw */
 		void g_draw( ) override;

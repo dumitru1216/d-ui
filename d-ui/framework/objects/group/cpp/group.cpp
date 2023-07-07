@@ -3,7 +3,7 @@
 #include "../../../theme/theme.hpp"
 #include "../../../input/input.hpp"
 
-void ui::group::think( ) {
+void ui::group::g_think( ) {
 	auto& g_parent_window = g_find_parent< window >( g_object_window );
 
 	/* we are going to handle the animation later */
@@ -25,4 +25,9 @@ void ui::group::think( ) {
 		g_scroll_offset += g_parent_window.g_scroll_delta * 10.0;
 		g_scroll_offset = std::clamp< double >( g_scroll_offset, 0, static_cast< double >( g_max_height - g_area.h ) );
 	}
+}
+
+void ui::group::g_draw( ) {
+	/* initialize handling */
+	g_think( );
 }
