@@ -93,7 +93,7 @@ namespace warp {
 			warp::g_init.get( )->g_mouse_position( g_pos );
 		};
 
-		static std::add_pointer_t<void( std::string&, sdk::rect_t&, int )> g_text_bounding = [ ]( std::string& g_title, sdk::rect_t& g_bounds, int font ) {
+		static std::add_pointer_t<void( sdk::g_str&, sdk::rect_t&, int )> g_text_bounding = [ ]( sdk::g_str& g_title, sdk::rect_t& g_bounds, int font ) {
 			ImVec2 size = warp::g_init.get( )->g_text_size( g_title.c_str( ), font );
 
 			g_bounds.w = size.x;

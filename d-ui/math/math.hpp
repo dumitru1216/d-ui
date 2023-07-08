@@ -2,6 +2,8 @@
 #include "../includes.hpp"
 
 namespace sdk {
+	using g_str = std::string;
+
 	struct vec2_t {
 		/* default builders */
 		vec2_t( ) : x( 0 ), y( 0 ) { }

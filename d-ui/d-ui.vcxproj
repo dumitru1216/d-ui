@@ -144,6 +144,7 @@
     <ClCompile Include="framework\fonts\cpp\fonts.cpp" />
     <ClCompile Include="framework\input\cpp\input.cpp" />
     <ClCompile Include="framework\menu\cpp\menu.cpp" />
+    <ClCompile Include="framework\objects\checkbox\cpp\check.cpp" />
     <ClCompile Include="framework\objects\group\cpp\group.cpp" />
     <ClCompile Include="framework\objects\obj\cpp\obj.cpp" />
     <ClCompile Include="framework\objects\tab\cpp\tab.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="framework\fonts\fonts.hpp" />
     <ClInclude Include="framework\input\input.hpp" />
     <ClInclude Include="framework\menu\menu.hpp" />
+    <ClInclude Include="framework\objects\checkbox\check.hpp" />
     <ClInclude Include="framework\objects\group\group.hpp" />
     <ClInclude Include="framework\objects\obj\obj.hpp" />
     <ClInclude Include="framework\objects\tab\tab.hpp" />

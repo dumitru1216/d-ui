@@ -14,9 +14,9 @@ namespace ui {
 	public:
 		std::vector< std::shared_ptr< obj > > g_objects;
 		bool g_selected = false;
-		std::string g_title;
+		sdk::g_str g_title;
 
-		tab( const std::string& g_title ) {
+		tab( const sdk::g_str& g_title ) {
 			this->g_title = g_title;
 			g_type = g_object_tab;
 		}

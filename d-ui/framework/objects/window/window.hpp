@@ -7,7 +7,7 @@
 namespace ui {
 	class window : public obj {
 	private:
-		std::string g_title;
+		sdk::g_str g_title;
 		sdk::pos_t g_click_offset = sdk::pos_t( );
 
 		std::function< void( ) > g_overlay_func;
@@ -29,7 +29,7 @@ namespace ui {
 		/* doubles */
 		double g_scroll_delta = 0.0;
 
-		window( const sdk::rect_t& g_area, std::string g_title ) {
+		window( const sdk::rect_t& g_area, sdk::g_str g_title ) {
 			this->g_area = g_area;
 			this->g_title = g_title;
 
