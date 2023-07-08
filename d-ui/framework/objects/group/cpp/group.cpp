@@ -4,6 +4,7 @@
 #include "../../../input/input.hpp"
 #include "../../../panel/panel.hpp"
 #include "../../../warper/warper.hpp"
+#include "../../../fonts/fonts.hpp"
 
 void ui::group::g_think( ) {
 	auto& g_parent_window = g_find_parent< window >( g_object_window );
@@ -88,6 +89,21 @@ void ui::group::g_draw( ) {
 			theme::g_init.get( )->g_map.g_accent.g_modify_alpha( g_outline_anim ), 3
 		);
 	}
+
+	warp::bindings::g_create_text(
+		sdk::vec2_t( g_cursor_pos.x - 3, g_cursor_pos.y + 8 ), sdk::col_t( ).g_modify_alpha( 200 ), 
+		             fonts::impl::g_font_t::roboto, this->g_title.c_str( ), false
+	);
+
+	/* clip elements */
+	warp::bindings::g_clip( sdk::rect_t( og_cursor_pos.x, og_cursor_pos.y + 26 + 1, g_area.w, g_area.h - 26 - 1 ), [ & ]( ) {
+		std::for_each( g_objects.begin( ), g_objects.end( ), [ & ]( std::shared_ptr<obj>& child ) {
+			child->g_area = sdk::rect_t( 0, 0, g_area.w - theme::g_init.get( )->g_map.spacing * 2, theme::g_init.get( )->g_map.spacing );
+			/* set the child's area to a new rectangle with adjusted width and height */
+
+			child->g_draw_ex_parent( ); /* invoke the g_draw_ex_parent function for the child */
+		} );
+	} );
 
 	/* too many items; we need to be able to scroll down on this groupbox */
 	if ( g_max_height - g_area.h > 0 ) {
