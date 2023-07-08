@@ -10,7 +10,7 @@ void ui::group::g_think( ) {
 	auto& g_parent_window = g_find_parent< window >( g_object_window );
 
 	/* we are going to handle the animation later */
-	g_animate( sdk::rect_t( g_parent_window.g_cursor_pos.x, g_parent_window.g_cursor_pos.y, g_area.w, g_area.h ) );
+	g_animate( sdk::rect_t( g_parent_window.g_cursor_pos.x, g_parent_window.g_cursor_pos.y + 45, g_area.w, g_area.h ) );
 
 	/* calculate how much room we have for new objects */
 	g_max_height = 26 + theme::g_init.get( )->g_map.spacing * 2;

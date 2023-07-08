@@ -15,7 +15,7 @@ void ui::window::think( ) {
 		calculate the click offset as the difference between g_mouse_mpos and the coordinates of g_area.
 	*/
 	if ( !g_pressing_move_key && GetAsyncKeyState( VK_LBUTTON ) && 
-		 handling::g_init.get()->g_hovering( sdk::rect_t( g_area.x, g_area.y - 26, g_area.w, 26 ) ) ) {
+		 handling::g_init.get()->g_hovering( sdk::rect_t( g_area.x, g_area.y, g_area.w, 40 ) ) ) {
 		g_pressing_move_key = true;
 
 		sdk::pos_t g_mouse_mpos{};
@@ -52,14 +52,14 @@ void ui::window::think( ) {
 	if ( g_area.x < 0 )
 		g_area.x = 0;
 
-	if ( g_area.y - 26 < 0 )
-		g_area.y = 26;
+	if ( g_area.y < 0 )
+		g_area.y = 0;
 
 	if ( g_area.x + g_area.w > g_screen_rect.w )
 		g_area.x = g_screen_rect.w - g_area.w;
 
-	if ( g_area.y + g_area.h - 26 > g_screen_rect.h )
-		g_area.y = g_screen_rect.h - g_area.h + 26;
+	if ( g_area.y + g_area.h > g_screen_rect.h )
+		g_area.y = g_screen_rect.h - g_area.h;
 
 	/* animate */
 	g_animate( g_area );
