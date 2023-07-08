@@ -14,6 +14,11 @@ void menu::impl::g_run( ) {
 					ragebot->g_handle_group( main_grp );
 				};
 
+				auto main_grp2 = std::make_shared< ui::group >( "main2" );
+				{
+					ragebot->g_handle_group( main_grp2 );
+				};
+
 				ragebot->g_add_columns( 2 );
 			} window->g_add_tab( ragebot );
 

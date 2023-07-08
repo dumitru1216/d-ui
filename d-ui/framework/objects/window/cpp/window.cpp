@@ -196,7 +196,8 @@ void ui::window::g_draw( ) {
 	} );
 
 	/* draw window objects */
-	warp::bindings::g_clip( g_area, [ & ]( ) {std::for_each( g_objects.begin( ), g_objects.end( ), [ ]( std::shared_ptr< obj >& child ) {
+	warp::bindings::g_clip( g_area, [ & ]( ) {
+		std::for_each( g_objects.begin( ), g_objects.end( ), [ ]( std::shared_ptr< obj >& child ) {
 			child->g_draw( );
 		} );
 	} );

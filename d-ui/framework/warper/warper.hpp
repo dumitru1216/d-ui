@@ -66,7 +66,8 @@ namespace warp {
 
 		static std::add_pointer_t<void( sdk::rect_t, std::function<void( )> )> g_clip = 
 			[ ]( sdk::rect_t g_area, std::function<void( )> g_function ) {
-			g_warp_drawlist->PushClipRect( ImVec2( g_area.x, g_area.y ), ImVec2( g_area.w, g_area.h ), true );
+			g_warp_drawlist->PushClipRect( ImVec2( g_area.x - 0.5f, g_area.y - 0.5f ), 
+										   ImVec2( g_area.x + g_area.w - 0.5f, g_area.y + g_area.h - 0.5f ), true );
 
 			g_input_clip_area = true;
 			g_input_clip_rect = g_area;

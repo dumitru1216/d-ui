@@ -81,7 +81,7 @@ namespace ui {
 				  return g_area.h;
 			}
 
-			return 0;
+			return g_area.h;
 		}
 
 		/* void & virtual */

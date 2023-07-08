@@ -9,6 +9,7 @@ void ui::group::g_think( ) {
 	auto& g_parent_window = g_find_parent< window >( g_object_window );
 
 	/* we are going to handle the animation later */
+	g_animate( sdk::rect_t( g_parent_window.g_cursor_pos.x, g_parent_window.g_cursor_pos.y, g_area.w, g_area.h ) );
 
 	/* calculate how much room we have for new objects */
 	g_max_height = 26 + theme::g_init.get( )->g_map.spacing * 2;
@@ -41,25 +42,25 @@ void ui::group::g_draw( ) {
 	auto& cursor_pos = g_parent_window.g_cursor_pos;
 	const auto og_cursor_pos = cursor_pos;
 
-	/* drawing */
-	warp::bindings::g_create_filled_rect(
-		sdk::rect_t( og_cursor_pos.x, og_cursor_pos.y, g_area.w, g_area.h ), sdk::col_t( 30, 30, 30 ), 0
-	);
-
 	/* move all objects inside group */
 	cursor_pos.x += theme::g_init.get( )->g_map.spacing;
 	cursor_pos.y += theme::g_init.get( )->g_map.spacing * 2;
 
-	/* draw group objects */
-	warp::bindings::g_clip( sdk::rect_t( og_cursor_pos.x, og_cursor_pos.y + 26 + 1, g_area.w, g_area.h - 26 - 1 ), [ & ]( ) {
-		cursor_pos.y -= g_scroll_offset;
+	/* drawing */
+	warp::bindings::g_create_filled_rect(
+		sdk::rect_t( cursor_pos.x, cursor_pos.y, g_area.w, g_area.h ), sdk::col_t( 30, 30, 30 ), 0
+	);
 
-		std::for_each(g_objects.begin( ),g_objects.end( ),[ & ]( std::shared_ptr< obj >& child ) {
-			child->g_area = sdk::rect_t( 0, 0, g_area.w - theme::g_init.get( )->g_map.spacing * 2, theme::g_init.get( )->g_map.spacing );
-			child->g_draw_ex_parent( );
-		}
-		);
-	} );
+	/* draw group objects */
+	//warp::bindings::g_clip( sdk::rect_t( og_cursor_pos.x, og_cursor_pos.y + 26 + 1, g_area.w, g_area.h - 26 - 1 ), [ & ]( ) {
+	//	cursor_pos.y -= g_scroll_offset;
+	//
+	//	std::for_each(g_objects.begin( ),g_objects.end( ),[ & ]( std::shared_ptr< obj >& child ) {
+	//		child->g_area = sdk::rect_t( 0, 0, g_area.w - theme::g_init.get( )->g_map.spacing * 2, theme::g_init.get( )->g_map.spacing );
+	//		child->g_draw_ex_parent( );
+	//	}
+	//	);
+	//} );
 
 	/* too many items; we need to be able to scroll down on this groupbox */
 	if ( g_max_height - g_area.h > 0 ) {

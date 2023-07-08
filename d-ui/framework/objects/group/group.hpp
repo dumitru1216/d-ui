@@ -7,6 +7,8 @@ namespace ui {
 	private:
 		double g_scroll_offset = 0.0;
 		int g_max_height = 0;
+
+		sdk::rect_t g_pos = sdk::rect_t( );
 	public:
 		std::vector< std::shared_ptr< obj > > g_objects;
 		std::string g_title;
