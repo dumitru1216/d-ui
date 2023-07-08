@@ -49,19 +49,45 @@ void ui::group::g_draw( ) {
 	/* drawing */
 	warp::bindings::g_create_filled_rect(
 		sdk::rect_t( g_cursor_pos.x - 10, g_cursor_pos.y + 5, g_area.w, g_area.h ), 
-		sdk::col_t( 30, 30, 30 ), 0
+		sdk::col_t( 22, 18, 43 ), 3
 	);
 
-	/* draw group objects */
-	//warp::bindings::g_clip( sdk::rect_t( og_cursor_pos.x, og_cursor_pos.y + 26 + 1, g_area.w, g_area.h - 26 - 1 ), [ & ]( ) {
-	//	cursor_pos.y -= g_scroll_offset;
-	//
-	//	std::for_each(g_objects.begin( ),g_objects.end( ),[ & ]( std::shared_ptr< obj >& child ) {
-	//		child->g_area = sdk::rect_t( 0, 0, g_area.w - theme::g_init.get( )->g_map.spacing * 2, theme::g_init.get( )->g_map.spacing );
-	//		child->g_draw_ex_parent( );
-	//	}
-	//	);
-	//} );
+	/* im too lazy to make something fancy atm so im just going to do a simple style / max 15 topbar */
+	warp::bindings::g_create_filled_rect(
+		sdk::rect_t( g_cursor_pos.x - 10, g_cursor_pos.y + 28, g_area.w, 1 ),
+		sdk::col_t( 0, 0, 0 ), 0
+	);
+
+	/* animation */
+	auto g_highlight = theme::g_init.get( )->g_map.g_anim_speed + 
+		/* increase animation time without creating another double */ 0.15;
+	int g_bar_anim{ 1200 };
+	int g_outline_anim{ 200 };
+
+	/* initialization */
+	g_bar_anim = g_fade_timer > g_highlight ? 1200 : int( g_fade_timer * ( 1.0 / g_highlight ) * g_bar_anim );
+	g_outline_anim = g_fade_timer > g_highlight ? 200 : int( g_fade_timer * ( 1.0 / g_highlight ) * g_outline_anim );
+
+	/* clamping */
+	if ( g_outline_anim > 200 )
+		g_outline_anim = 200;
+
+	if ( g_bar_anim > g_area.w )
+		g_bar_anim = g_area.w;
+
+	if ( g_bar_anim > 0 ) {
+		warp::bindings::g_create_filled_rect(
+			sdk::rect_t( ( g_cursor_pos.x - 10 ) + ( g_area.w / 2 ) - ( g_bar_anim / 2 ),
+			g_cursor_pos.y + 28, g_bar_anim, 1 ), theme::g_init.get( )->g_map.g_accent.g_modify_alpha( 120 ), 3
+		);
+	}
+
+	if ( g_outline_anim > 0 ) {
+		warp::bindings::g_create_rect(
+			sdk::rect_t( g_cursor_pos.x - 10 - 1, g_cursor_pos.y + 5 - 1, g_area.w + 1, g_area.h + 1 ),
+			theme::g_init.get( )->g_map.g_accent.g_modify_alpha( g_outline_anim ), 3
+		);
+	}
 
 	/* too many items; we need to be able to scroll down on this groupbox */
 	if ( g_max_height - g_area.h > 0 ) {
