@@ -39,16 +39,17 @@ void ui::group::g_draw( ) {
 	auto& g_parent_window = g_find_parent< window >( g_object_window );
 
 	/* cursor pos */
-	auto& cursor_pos = g_parent_window.g_cursor_pos;
-	const auto og_cursor_pos = cursor_pos;
+	auto& g_cursor_pos = g_parent_window.g_cursor_pos;
+	const auto og_cursor_pos = g_cursor_pos;
 
 	/* move all objects inside group */
-	cursor_pos.x += theme::g_init.get( )->g_map.spacing;
-	cursor_pos.y += theme::g_init.get( )->g_map.spacing * 2;
+	g_cursor_pos.x += theme::g_init.get( )->g_map.spacing;
+	g_cursor_pos.y += theme::g_init.get( )->g_map.spacing * 2;
 
 	/* drawing */
 	warp::bindings::g_create_filled_rect(
-		sdk::rect_t( cursor_pos.x, cursor_pos.y, g_area.w, g_area.h ), sdk::col_t( 30, 30, 30 ), 0
+		sdk::rect_t( g_cursor_pos.x, g_cursor_pos.y, g_area.w, g_area.h ), 
+		sdk::col_t( 30, 30, 30 ), 0
 	);
 
 	/* draw group objects */
