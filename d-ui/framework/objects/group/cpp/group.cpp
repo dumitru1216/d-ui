@@ -48,7 +48,7 @@ void ui::group::g_draw( ) {
 
 	/* drawing */
 	warp::bindings::g_create_filled_rect(
-		sdk::rect_t( g_cursor_pos.x, g_cursor_pos.y, g_area.w, g_area.h ), 
+		sdk::rect_t( g_cursor_pos.x - 10, g_cursor_pos.y + 5, g_area.w, g_area.h ), 
 		sdk::col_t( 30, 30, 30 ), 0
 	);
 

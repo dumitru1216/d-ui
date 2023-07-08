@@ -12,14 +12,17 @@ void menu::impl::g_run( ) {
 				auto main_grp = std::make_shared< ui::group >( "main" );
 				{
 					ragebot->g_handle_group( main_grp );
-				};
+				}; ragebot->g_add_columns( 1 );
 
-				auto main_grp2 = std::make_shared< ui::group >( "main2" );
+				auto main_grp2 = std::make_shared< ui::group >( "accuracy" );
 				{
 					ragebot->g_handle_group( main_grp2 );
-				};
+				}; 
+				auto main_grp3 = std::make_shared< ui::group >( "other" );
+				{
+					ragebot->g_handle_group( main_grp3 );
+				}; ragebot->g_add_columns( 2 ); /* max 2 columns */
 
-				ragebot->g_add_columns( 2 );
 			} window->g_add_tab( ragebot );
 
 			auto antiaim = std::make_shared< ui::tab >( "anti-aim" );

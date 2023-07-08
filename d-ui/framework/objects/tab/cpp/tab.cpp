@@ -25,8 +25,7 @@ void ui::tab::g_draw( ) {
 	}
 
 	/* calculate column width with information */
-	auto total_column_padding = theme::g_init.get()->g_map.spacing * ( g_rows + 1 );
-	auto space_per_column = g_window_dimensions.w / g_rows;
+	auto space_per_column = ( g_window_dimensions.w / g_rows ) - 10;
 	auto calculated_column_width = 0;
 
 	if ( g_rows > 1 )
@@ -60,15 +59,14 @@ void ui::tab::g_draw( ) {
 		}
 
 		/* calculate column height with previous information */
-		auto total_column_padding_h = theme::g_init.get( )->g_map.spacing * ( item_count_inside_row + 1 );
-		auto space_per_column_h = g_window_dimensions.h / item_count_inside_row;
+		auto space_per_column_h = ( g_window_dimensions.h / item_count_inside_row );
 		auto calculated_column_height = 0;
 
 		if ( item_count_inside_row > 1 )
-			calculated_column_height = space_per_column_h - theme::g_init.get( )->g_map.spacing -
-			                               double( theme::g_init.get( )->g_map.spacing ) / double( item_count_inside_row );
+			calculated_column_height = ( space_per_column_h - theme::g_init.get( )->g_map.spacing -
+										 double( theme::g_init.get( )->g_map.spacing ) / double( item_count_inside_row ) ) - 20;
 		else
-			calculated_column_height = space_per_column_h - theme::g_init.get( )->g_map.spacing * 2.0;
+			calculated_column_height = ( space_per_column_h - theme::g_init.get( )->g_map.spacing * 2.0 ) - 40;
 
 		/* draw groups that are in the corresponding columns */
 		std::for_each( g_objects.begin( ), g_objects.end( ), [ & ]( std::shared_ptr< obj >& child ) {
