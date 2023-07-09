@@ -13,7 +13,7 @@ void ui::group::g_think( ) {
 	g_animate( sdk::rect_t( g_parent_window.g_cursor_pos.x, g_parent_window.g_cursor_pos.y + 45, g_area.w, g_area.h ) );
 
 	/* calculate how much room we have for new objects */
-	g_max_height = 26 + theme::g_init.get( )->g_map.spacing * 2;
+	g_max_height = 45 + theme::g_init.get( )->g_map.spacing * 2;
 
 	/* calculate and add the height of each child object to g_max_height */
 	std::for_each( g_objects.begin( ), g_objects.end( ), [ & ]( std::shared_ptr<obj>& child ) {
@@ -96,9 +96,13 @@ void ui::group::g_draw( ) {
 	);
 
 	/* clip elements */
-	warp::bindings::g_clip( sdk::rect_t( og_cursor_pos.x, og_cursor_pos.y + 26 + 1, g_area.w, g_area.h - 26 - 1 ), [ & ]( ) {
+	warp::bindings::g_clip( sdk::rect_t( og_cursor_pos.x, og_cursor_pos.y + 20, g_area.w, g_area.h), [ & ]( ) {
+		g_cursor_pos.y += 35;
+		g_cursor_pos.y -= g_scroll_offset;
+
 		std::for_each( g_objects.begin( ), g_objects.end( ), [ & ]( std::shared_ptr<obj>& child ) {
 			child->g_area = sdk::rect_t( 0, 0, g_area.w - theme::g_init.get( )->g_map.spacing * 2, theme::g_init.get( )->g_map.spacing );
+			g_cursor_pos.y += 5;
 			/* set the child's area to a new rectangle with adjusted width and height */
 
 			child->g_draw_ex_parent( ); /* invoke the g_draw_ex_parent function for the child */
@@ -107,6 +111,6 @@ void ui::group::g_draw( ) {
 
 	/* too many items; we need to be able to scroll down on this groupbox */
 	if ( g_max_height - g_area.h > 0 ) {
-		/* draw smth here */
+		/**/
 	}
 }

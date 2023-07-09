@@ -2,6 +2,7 @@
 #include "../../window/window.hpp"
 #include "../../../theme/theme.hpp"
 #include "../../../input/input.hpp"
+#include "../../checkbox/check.hpp"
 
 void ui::obj::g_animate( const sdk::rect_t& g_area ) {
 	auto& g_parent = g_find_parent<obj>( g_object_panel );

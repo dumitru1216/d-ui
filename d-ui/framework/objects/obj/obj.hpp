@@ -78,7 +78,7 @@ namespace ui {
 				case g_object_label:
 				case g_object_button:
 				case g_object_checkbox:
-				  return g_area.h;
+				  return 3;
 			}
 
 			return g_area.h;

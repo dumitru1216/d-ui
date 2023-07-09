@@ -11,6 +11,14 @@ void menu::impl::g_run( ) {
 			{
 				auto main_grp = std::make_shared< ui::group >( "main" );
 				{
+					main_grp->g_handle_obj( std::make_shared< ui::checkbox >( "checkbox" ) );
+					main_grp->g_handle_obj( std::make_shared< ui::checkbox >( "checkbox" ) );
+					main_grp->g_handle_obj( std::make_shared< ui::checkbox >( "checkbox" ) );
+					main_grp->g_handle_obj( std::make_shared< ui::checkbox >( "checkbox" ) );
+
+					
+
+
 					ragebot->g_handle_group( main_grp );
 				}; ragebot->g_add_columns( 1 );
 

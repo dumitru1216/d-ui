@@ -17,7 +17,7 @@ namespace ui {
 		~checkbox( ) { }
 
 		/* init + drawing */
-		void think( );
+		void g_think( );
 		void g_draw( ) override;
 	};
 }
